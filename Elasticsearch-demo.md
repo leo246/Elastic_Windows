@@ -374,7 +374,7 @@ The [Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/d
 
 ## Exploring Your Data:
 
-## [https://www.elastic.co/guide/en/elasticsearch/reference/current/_exploring_your_data.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/_exploring_your_data.html)
+[https://www.elastic.co/guide/en/elasticsearch/reference/current/_exploring_your_data.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/_exploring_your_data.html)
 
 ### Sample Dataset:
 
