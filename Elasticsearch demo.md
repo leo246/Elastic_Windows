@@ -547,7 +547,7 @@ The *from *parameter (0-based) specifies which document index to start from and 
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/_executing_searches.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/_executing_searches.html)
 
-Let’s dig some more into the Query DSL.  By default, the full JSON document is returned as part of all searches.  This is referred to as the source (*_source *field in the search hits).  If we don’t want the entire source document returned, we have the ability to request only a few fields from within the source to be returned.  
+Let’s dig some more into the Query DSL.  By default, the full JSON document is returned as part of all searches.  This is referred to as the source (_source field in the search hits).  If we don’t want the entire source document returned, we have the ability to request only a few fields from within the source to be returned.  
 
 1.  Below shows how to return two fields, *account_number *and *balance *(inside *_source*), from the search:
 
@@ -565,11 +565,11 @@ Let’s dig some more into the Query DSL.  By default, the full JSON document is
 
 # ![image alt text](image_28.png)
 
-Note that the above simply reduces the *_source *field.  It will still only return one field named *_source *but within it, only fields *account_number *and *balance *are included.
+Note that the above simply reduces the _source field.  It will still only return one field named _source but within it, only fields account_number and balance are included.
 
-if you are from a SQL background, the above is somewhat similar in concept to the *SQL SELECT FROM* field list.
+if you are from a SQL background, the above is somewhat similar in concept to the SQL SELECT FROM field list.
 
-We have seen how the *match_all *query is used to match all documents.  Let’s now introduce a new query called the [match query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html), which can be thought of as a basic fielded search query (i.e. a search done against a specific field or set of fields).
+We have seen how the match_all query is used to match all documents.  Let’s now introduce a new query called the [match query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html), which can be thought of as a basic fielded search query (i.e. a search done against a specific field or set of fields).
 
 2.  This example returns the account numbered 20:
 
@@ -595,7 +595,7 @@ We have seen how the *match_all *query is used to match all documents.  Let’s 
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-4.  This example returns all accounts containing the term "mill" or “lane” in the address:
+4.  This example returns all accounts containing the term "mill" or "lane" in the address:
 
     $body = '{
 
@@ -619,26 +619,17 @@ We have seen how the *match_all *query is used to match all documents.  Let’s 
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-6.  Let’s introduce the [bool (ean) query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html).  The *bool *query allows us to compose smaller queries into bigger queries using boolean logic.  This example composes two *match *queries and returns all accounts containing "mill" and “lane” in the address:
+6.  Let’s introduce the [bool (ean) query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html).  The bool query allows us to compose smaller queries into bigger queries using boolean logic.  This example composes two match queries and returns all accounts containing "mill" and “lane” in the address:
 
     $body = '{
-
       "query": {
-
         "bool": {
-
           "must": [
-
             { "match": { "address": "mill" } },
-
             { "match": { "address": "lane" } }
-
           ]
-
         }
-
       }
-
     }'
 
     Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
@@ -647,88 +638,59 @@ We have seen how the *match_all *query is used to match all documents.  Let’s 
 
 ![image alt text](image_29.png)
 
-In the example above, the *bool must* clause specifies all queries that must be true for a documents to be considered a match
+In the example above, the bool must clause specifies all queries that must be true for a documents to be considered a match
 
-7.  In contrast, this example composes two *match *queries and returns all accounts containing "mill" or “lane” in the address:
+7.  In contrast, this example composes two match queries and returns all accounts containing "mill" or "lane" in the address:
 
     $body = '{
-
       "query": {
-
         "bool": {
-
           "should": [
-
             { "match": { "address": "mill" } },
-
             { "match": { "address": "lane" } }
-
           ]
-
         }
-
       }
-
     }'
 
     Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-The *bool should* clause specifies a list of queries either of which must be true for a document to be considered a match.
+The bool should clause specifies a list of queries either of which must be true for a document to be considered a match.
 
-8.  This example composes two match queries and returns all the accounts that contain neither "mill" nor “lane” in the address:
+8.  This example composes two match queries and returns all the accounts that contain neither "mill" nor "lane" in the address:
 
     $body = '{
-
       "query": {
-
         "bool": {
-
           "must_not": [
-
             { "match": { "address": "mill" } },
-
             { "match": { "address": "lane" } }
-
           ]
-
         }
-
       }
-
     }'
 
     Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-The bool *must_not *clause specifies a list of queries none of which must be true for a document to be considered a match.  You can combine *must*, *should *and *must_not *clauses simultaneously inside a *bool *query.  Furthermore, we can compose *bool *queries inside any of these *bool *clauses to mimic any complex multi-level boolean logic.
+The bool must_not clause specifies a list of queries none of which must be true for a document to be considered a match.  You can combine must, should and must_not clauses simultaneously inside a bool query.  Furthermore, we can compose bool queries inside any of these bool clauses to mimic any complex multi-level boolean logic.
 
 9.  This example returns all accounts of anybody who is 40 years old, but doesn’t live in ID(aho):
 
     $body = '{
-
       "query": {
-
         "bool": {
-
           "must": [
-
             { "match": { "age": "40" } }
-
           ],
-
           "must_not": [
-
             { "match": { "state": "ID" } }
-
           ]
-
         }
-
       }
-
     }'
 
     Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
@@ -751,9 +713,9 @@ Slightly out of scope for this document, you could install cURL for Windows by f
 
 ## Sense:
 
-*[https://www.elastic.co/guide/en/sense/current/introduction.htm*l](https://www.elastic.co/guide/en/sense/current/introduction.html)
+[https://www.elastic.co/guide/en/sense/current/introduction.htm*l](https://www.elastic.co/guide/en/sense/current/introduction.html)
 
-*Sense is a handy console for interacting with the REST API of Elasticsearch. As you can see below, Sense is composed of two main panes. The left pane, named the editor, is where you type the requests you will submit to Elasticsearch. The responses from Elasticsearch are shown on the right hand panel. The address of your Elasticsearch server should be entered in the text box on the top of screen (and defaults to **localhost:9200**).*
+Sense is a handy console for interacting with the REST API of Elasticsearch. As you can see below, Sense is composed of two main panes. The left pane, named the editor, is where you type the requests you will submit to Elasticsearch. The responses from Elasticsearch are shown on the right hand panel. The address of your Elasticsearch server should be entered in the text box on the top of screen (and defaults to **localhost:9200**).
 
 In this document, we are focusing on Elasticsearch, as well as creating and manipulating data via the command-line.  In some cases, a ‘nice-to-have’ utility would be Sense (a Kibana4 application).  In Elasticsearch v5/Kibana v5 Sense is considered legacy, and is now referred to as ‘[Console](https://www.elastic.co/guide/en/kibana/current/console-kibana.html)’.
 
