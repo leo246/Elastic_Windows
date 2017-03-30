@@ -2,8 +2,6 @@
 
 **This documentation is Microsoft ****Windows**** specific (used on Windows 2012 R2).**
 
-[[TOC]]
-
 # Getting Started
 
 [https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc)
@@ -344,7 +342,7 @@ In addition to being able to index, update and delete individual documents, Elas
 
 The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one bulk operation:
 
-$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}`n{'name':'Jane Doe'}`n".Replace("'","`"")
+*($Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}`n{'name':'Jane Doe'}`n".Replace("'","`"")*
 
 Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
@@ -354,7 +352,7 @@ Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Bo
 
 The following example updates the first document (ID of 1) and then deletes the second document (ID of 2) in one bulk operation:
 
-$Body = "{'update':{'_index':'customer','_type':'external','_id':'1'}}`n{'doc':{'name':'John Doe becomes Jane Doe'}}`n{'delete':{'_index':'customer','_type':'external','_id':'2'}}`n".Replace("'","`"")
+*$Body = "{'update':{'_index':'customer','_type':'external','_id':'1'}}`n{'doc':{'name':'John Doe becomes Jane Doe'}}`n{'delete':{'_index':'customer','_type':'external','_id':'2'}}`n".Replace("'","`"")*
 
 Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
@@ -503,9 +501,7 @@ As above, the query part indicates what our query definition is, and the match_a
 
       }'
 
-     Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-     select content | format-list
+     Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -525,9 +521,7 @@ This will only list the first 2 results.  Note, that if you do not specify a siz
 
      }'
 
-     Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-     select content | format-list
+     Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -543,9 +537,7 @@ The *from *parameter (0-based) specifies which document index to start from and 
 
     }'
 
-    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -567,9 +559,7 @@ Let’s dig some more into the Query DSL.  By default, the full JSON document is
 
     }'
 
-    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -589,9 +579,7 @@ We have seen how the *match_all *query is used to match all documents.  Let’s 
 
     }'
 
-    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -603,9 +591,7 @@ We have seen how the *match_all *query is used to match all documents.  Let’s 
 
     }'
 
-    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -617,9 +603,7 @@ We have seen how the *match_all *query is used to match all documents.  Let’s 
 
     }'
 
-    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -631,9 +615,7 @@ We have seen how the *match_all *query is used to match all documents.  Let’s 
 
     }'
 
-    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -659,9 +641,7 @@ We have seen how the *match_all *query is used to match all documents.  Let’s 
 
     }'
 
-    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -691,9 +671,7 @@ In the example above, the *bool must* clause specifies all queries that must be 
 
     }'
 
-    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -721,9 +699,7 @@ The *bool should* clause specifies a list of queries either of which must be tru
 
     }'
 
-    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -755,9 +731,7 @@ The bool *must_not *clause specifies a list of queries none of which must be tru
 
     }'
 
-    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
