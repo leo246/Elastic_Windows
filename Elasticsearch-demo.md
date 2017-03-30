@@ -727,7 +727,7 @@ Aggregations provide the ability to group and extract statistics from data.  In 
 
 In SQL, the above aggregation is similar in concept to:
 
-SELECT state, COUNT(*) FROM bank GROUP BY state ORDER BY COUNT(*) DESC
+SELECT state, COUNT(\*) FROM bank GROUP BY state ORDER BY COUNT(\*) DESC
 
 We can see 27 accounts in ID (Idaho), followed by 27 accounts in TX (Texas), followed accounts in AL (Alabama), and so forth.
 
