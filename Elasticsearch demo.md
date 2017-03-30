@@ -190,7 +190,7 @@ Output as follows:
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/_index_and_query_a_document.html#_index_and_query_a_document](https://www.elastic.co/guide/en/elasticsearch/reference/current/_index_and_query_a_document.html#_index_and_query_a_document)
 
-We will now enter something into the customer index.  In order to **index**(https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc)a **document**(https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc), we must tell Elasticsearch which **type**(https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_type) in the index it should go to.
+We will now enter something into the customer index.  In order to [index](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc) a [document](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc), we must tell Elasticsearch which [type](https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_type) in the index it should go to.
 
 As we are getting into more complex commands/scripts in Powershell, it is advised to use the **Powershell ISE** (or any other equivalent editor of your choice) for the following sections. 
 
@@ -342,7 +342,7 @@ In addition to being able to index, update and delete individual documents, Elas
 
 The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one bulk operation:
 
-*($Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}`n{'name':'Jane Doe'}`n".Replace("'","`"")*
+*$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}`n{'name':'Jane Doe'}`n".Replace("'","`"")*
 
 Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
