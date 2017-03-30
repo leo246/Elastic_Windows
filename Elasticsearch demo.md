@@ -100,7 +100,7 @@ Each Elasticsearch shard is a Lucene index. There is a maximum number of documen
 
 For the purpose of this document, we used **Java 8u112.**
 
-2. Once installed, navigate to **System**** **in Control Panel.  Click on **Advanced System Settings**, and then click the **Environment Variables **button.
+2. Once installed, navigate to System in Control Panel.  Click on Advanced System Settings, and then click the Environment Variables button.
 
 3. Create a System variable as follows:
 
@@ -110,7 +110,7 @@ For the purpose of this document, we used **Java 8u112.**
 
 ![image alt text](image_0.png)
 
-	Click OK and close all windows.
+Click OK and close all windows.
 
 4.  Browse to [https://www.elastic.co/downloads/elasticsearch](https://www.elastic.co/downloads/elasticsearch) and download the ElasticSearch version 5.0.0 zip file.
 
@@ -174,7 +174,7 @@ The above indicates that there are no indices yet in the cluster.
 
 1. Create an index named "customer" with the following command:
 
-*Invoke-WebRequest -Method PUT -Uri **[http://localhost:9200/custome*r](http://localhost:9200/customer)
+*Invoke-WebRequest -Method PUT -Uri http://localhost:9200/customer*
 
 Output as follows:
 
@@ -192,13 +192,13 @@ Output as follows:
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/_index_and_query_a_document.html#_index_and_query_a_document](https://www.elastic.co/guide/en/elasticsearch/reference/current/_index_and_query_a_document.html#_index_and_query_a_document)
 
-We will now enter something into the customer index.  In order to **[index** ](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc)a **[documen**t](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc), we must tell Elasticsearch which **[typ**e](https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_type) in the index it should go to.
+We will now enter something into the customer index.  In order to **[index]**(https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc)a **[document]**(https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc), we must tell Elasticsearch which **[type]**(https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_type) in the index it should go to.
 
 As we are getting into more complex commands/scripts in Powershell, it is advised to use the **Powershell ISE** (or any other equivalent editor of your choice) for the following sections. 
 
 1. Index a customer document into the customer index, "external" type, with ID of “1” as follows:
 
-*$name** **=** @{**"name"** **=** **"John Doe"**}*
+*$name* **=** @{**"name"** **=** **"John Doe"**}*
 
 *$json** **=** **$name** **|** **ConvertTo-Json*
 
@@ -374,13 +374,26 @@ The [Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/d
 
 We will now work with a more realistic dataset, through a sample of fictitious JSON documents of customer bank account information.  Each document has the following schema:
 
-{    "account_number": 0,    "balance": 16623,    "firstname": "Bradshaw",    "lastname": "Mckenzie",    "age": 29,    "gender": "F",    "address": "244 Columbus Place",    "employer": "Euron",    "email": "bradshawmckenzie@euron.com",    "city": "Hobucken",    "state": "CO"}
+{
+    "account_number": 0,
+    "balance": 16623,
+    "firstname": "Bradshaw",
+    "lastname": "Mckenzie",
+    "age": 29,
+    "gender": "F",
+    "address": "244 Columbus Place",
+    "employer": "Euron",
+    "email": "bradshawmckenzie@euron.com",
+    "city": "Hobucken",
+    "state": "CO"
+}
 
 Data generated from [http://www.json-generator.com/](http://www.json-generator.com/) so ignore actual values and semantics of data as these are all randomly generated.
 
 ### Loading the Sample Dataset:
 
-1.    Download the sample dataset (accounts.json)[ here](https://github.com/elastic/elasticsearch/blob/master/docs/src/test/resources/accounts.json?raw=true).  Extract the file to your current directoryand load the file into the cluster with the following command:
+1.    Download the sample dataset (accounts.json)[ here](https://github.com/elastic/elasticsearch/blob/master/docs/src/test/resources/accounts.json?raw=true).  Extract the file to your current directory
+and load the file into the cluster with the following command:
 
 **Invoke-WebRequest ****-Method**** ****POST ****-Uri**** ****"****[http://localhost:9200/bank/account/_bulk?pretty&refres**h](http://localhost:9200/bank/account/_bulk?pretty&refresh)**" ****-InFile**** ****accounts.json**
 
