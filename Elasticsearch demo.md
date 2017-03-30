@@ -140,7 +140,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 1. Check the cluster health, by using the[ _cat API](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html).  Remember that the node HTTP endpoint is at port 9200:
 
-*Invoke-WebRequest -Method GET -URI http://localhost:9200/_cat/health?v | Select Content | Format-List*
+    Invoke-WebRequest -Method GET -URI http://localhost:9200/_cat/health?v | Select Content | Format-List
 
 2. The response would look similar to the following:
 
@@ -148,7 +148,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 3. Get a list of nodes with the following command:
 
-*Invoke-WebRequest -Method GET -Uri http://localhost:9200/_cat/nodes?v | Select Content | Format-List*
+    Invoke-WebRequest -Method GET -Uri http://localhost:9200/_cat/nodes?v | Select Content | Format-List
 
 4. The output should look similar to the following:
 
@@ -160,7 +160,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 1. Take a look at the indices with the following command:
 
-*Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List*
+    Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
 2.  The output should look similar to the following:
 
@@ -174,7 +174,7 @@ The above indicates that there are no indices yet in the cluster.
 
 1. Create an index named "customer" with the following command:
 
-*Invoke-WebRequest -Method PUT -Uri http://localhost:9200/customer*
+    Invoke-WebRequest -Method PUT -Uri http://localhost:9200/customer
 
 Output as follows:
 
@@ -182,7 +182,7 @@ Output as follows:
 
 2. List the indexes again with the following command:
 
-*Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List*
+    Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
 Output as follows:
 
@@ -198,11 +198,11 @@ As we are getting into more complex commands/scripts in Powershell, it is advise
 
 1. Index a customer document into the customer index, "external" type, with ID of “1” as follows:
 
-*$name* **=** @{**"name"** **=** **"John Doe"**}
+    $name = @{"name" = "John Doe"}
 
-*$json* **=** **$name** **|** **ConvertTo-Json
+    $json = $name | ConvertTo-Json
 
-*Invoke-WebRequest* **-Uri** **"http://localhost:9200/customer/external/1"** **-Body** **$json** **-ContentType** **'application/json'** **-Method** *Put* 
+    Invoke-WebRequest -Uri "http://localhost:9200/customer/external/1" -Body $json -ContentType 'application/json' -Method Put 
 
 2. The output will look similar to the following:
 
@@ -212,7 +212,7 @@ The above indicates that a new customer document was successfully created inside
 
 3. Retrieve the document created in the index with the following command:
 
-*Invoke-WebRequest -Method GET -Uri http://localhost:9200/customer/external/1?pretty | select Content | format-list*
+    Invoke-WebRequest -Method GET -Uri http://localhost:9200/customer/external/1?pretty | select Content | format-list
 
 4. The output should look similar to the following:
 
@@ -226,7 +226,7 @@ The above indicates that a new customer document was successfully created inside
 
 1. Delete the index created, with the following command:
 
-*Invoke-WebRequest -Method DELETE -Uri http://localhost:9200/customer* 
+    Invoke-WebRequest -Method DELETE -Uri http://localhost:9200/customer
 
 2. The output should look as follows:
 
@@ -234,7 +234,7 @@ The above indicates that a new customer document was successfully created inside
 
 3. List all indexes with the following command:
 
-*Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List*
+    Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
 4. With output as follows:
 
@@ -344,9 +344,9 @@ In addition to being able to index, update and delete individual documents, Elas
 
 The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one bulk operation:
 
-*$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}`n{'name':'Jane Doe'}`n".Replace("'","`"")*
+$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}`n{'name':'Jane Doe'}`n".Replace("'","`"")
 
-*Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'*
+Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -374,19 +374,19 @@ The [Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/d
 
 We will now work with a more realistic dataset, through a sample of fictitious JSON documents of customer bank account information.  Each document has the following schema:
 
-{
-    "account_number": 0,
-    "balance": 16623,
-    "firstname": "Bradshaw",
-    "lastname": "Mckenzie",
-    "age": 29,
-    "gender": "F",
-    "address": "244 Columbus Place",
-    "employer": "Euron",
-    "email": "bradshawmckenzie@euron.com",
-    "city": "Hobucken",
-    "state": "CO"
-}
+    '{
+        "account_number": 0,
+        "balance": 16623,
+        "firstname": "Bradshaw",
+        "lastname": "Mckenzie",
+        "age": 29,
+        "gender": "F",
+        "address": "244 Columbus Place",
+        "employer": "Euron",
+        "email": "bradshawmckenzie@euron.com",
+        "city": "Hobucken",
+        "state": "CO"
+    }'
 
 Data generated from [http://www.json-generator.com/](http://www.json-generator.com/) so ignore actual values and semantics of data as these are all randomly generated.
 
