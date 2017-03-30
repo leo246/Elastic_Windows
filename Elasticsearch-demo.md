@@ -114,7 +114,7 @@ For the purpose of this document, we used **Java 8u112.**
 
 **Variable Value**:  <path to your Java JDK folder>
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_0.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_0.png)
 
 	Click OK and close all windows.
 
