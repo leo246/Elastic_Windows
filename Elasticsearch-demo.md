@@ -146,7 +146,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 1. Check the cluster health, by using the[ _cat API](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html).  Remember that the node HTTP endpoint is at port 9200:
 
-*Invoke-WebRequest -Method GET -URI http://localhost:9200/_cat/health?v | Select Content | Format-List*
+Invoke-WebRequest -Method GET -URI http://localhost:9200/_cat/health?v | Select Content | Format-List
 
 2. The response would look similar to the following:
 
@@ -154,7 +154,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 3. Get a list of nodes with the following command:
 
-*Invoke-WebRequest -Method GET -Uri http://localhost:9200/_cat/nodes?v | Select Content | Format-List*
+Invoke-WebRequest -Method GET -Uri http://localhost:9200/_cat/nodes?v | Select Content | Format-List
 
 4. The output should look similar to the following:
 
@@ -166,7 +166,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 1. Take a look at the indices with the following command:
 
-*Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List*
+Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
 2.  The output should look similar to the following:
 
@@ -180,7 +180,7 @@ The above indicates that there are no indices yet in the cluster.
 
 1. Create an index named "customer" with the following command:
 
-*Invoke-WebRequest -Method PUT -Uri **[http://localhost:9200/custome*r](http://localhost:9200/customer)
+Invoke-WebRequest -Method PUT -Uri http://localhost:9200/customer
 
 Output as follows:
 
@@ -188,7 +188,7 @@ Output as follows:
 
 2. List the indexes again with the following command:
 
-*Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List*
+Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
 Output as follows:
 
@@ -198,17 +198,17 @@ Output as follows:
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/_index_and_query_a_document.html#_index_and_query_a_document](https://www.elastic.co/guide/en/elasticsearch/reference/current/_index_and_query_a_document.html#_index_and_query_a_document)
 
-We will now enter something into the customer index.  In order to **[index** ](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc)a **[documen**t](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc), we must tell Elasticsearch which **[typ**e](https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_type) in the index it should go to.
+We will now enter something into the customer index.  In order to **[index]** (https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc) a **[document]**(https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc), we must tell Elasticsearch which **[type]**(https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_type) in the index it should go to.
 
 As we are getting into more complex commands/scripts in Powershell, it is advised to use the **Powershell ISE** (or any other equivalent editor of your choice) for the following sections. 
 
-1. Index a customer document into the customer index, "external" type, with ID of “1” as follows:
+1. Index a customer document into the customer index, "external" type, with ID of "1" as follows:
 
-*$name** **=** @{**"name"** **=** **"John Doe"**}*
+$name = @{"name" = "John Doe"}
 
-*$json** **=** **$name** **|** **ConvertTo-Json*
+$json = $name | ConvertTo-Json
 
-*Invoke-WebRequest** **-Uri** **"http://localhost:9200/customer/external/1"** **-Body** **$json** **-ContentType** **'application/json'** **-Method** **Put* 
+Invoke-WebRequest -Uri "http://localhost:9200/customer/external/1" -Body $json -ContentType 'application/json' -Method Put 
 
 2. The output will look similar to the following:
 
@@ -218,7 +218,7 @@ The above indicates that a new customer document was successfully created inside
 
 3. Retrieve the document created in the index with the following command:
 
-*Invoke-WebRequest -Method GET -Uri http://localhost:9200/customer/external/1?pretty | select Content | format-list*
+Invoke-WebRequest -Method GET -Uri http://localhost:9200/customer/external/1?pretty | select Content | format-list
 
 4. The output should look similar to the following:
 
@@ -232,7 +232,7 @@ The above indicates that a new customer document was successfully created inside
 
 1. Delete the index created, with the following command:
 
-*Invoke-WebRequest -Method DELETE -Uri http://localhost:9200/customer* 
+Invoke-WebRequest -Method DELETE -Uri http://localhost:9200/customer 
 
 2. The output should look as follows:
 
@@ -240,7 +240,7 @@ The above indicates that a new customer document was successfully created inside
 
 3. List all indexes with the following command:
 
-*Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List*
+Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
 4. With output as follows:
 
@@ -258,7 +258,7 @@ Elasticsearch provides data manipulation and search capabilities in near real ti
 
 ### Indexing/Replacing Documents:
 
-1.   	Previously we saw how to index a document.  Here is the command again:
+1.  Previously we saw how to index a document.  Here is the command again:
 
  
 
@@ -268,13 +268,13 @@ The above will index the specified document into a customer index, external type
 
  
 
-2.  	If the above command is executed again with a different (or same) document, Elasticsearch will replace (ie. reindex) a new document on top of the existing one with the ID of 1: 
+2.  If the above command is executed again with a different (or same) document, Elasticsearch will replace (ie. reindex) a new document on top of the existing one with the ID of 1: 
 
  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_14.png)
 
  
 
-3.  	The above changes the name of the document with the ID of 1 from "John Doe" to “Jane Doe”.  If we used a different ID, a new document will be indexed and the existing document(s) already in the index remains untouched.
+3.  The above changes the name of the document with the ID of 1 from "John Doe" to "Jane Doe".  If we used a different ID, a new document will be indexed and the existing document(s) already in the index remains untouched.
 
  
 
@@ -282,15 +282,15 @@ The above will index the specified document into a customer index, external type
 
 The above indexes a new document with an ID of 2.
 
-4.       When indexing, the ID part is optional.  If not specified, Elasticsearch will generate a random ID and then use it to index the document.  The actual ID Elasticsearch generates (or whatever we specified explicitly) is returned as part of the index API call.
+4.  When indexing, the ID part is optional.  If not specified, Elasticsearch will generate a random ID and then use it to index the document.  The actual ID Elasticsearch generates (or whatever we specified explicitly) is returned as part of the index API call.
 
  
 
-5.       This example shows how to index a document without an explicit ID:
+5.  This example shows how to index a document without an explicit ID:
 
   ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_16.png)
 
-Note that in the above case, we are using the **POST **verb instead of **PUT **since we didn't specify an ID.
+Note that in the above case, we are using the **POST** verb instead of **PUT** since we didn't specify an ID.
 
  
 
@@ -304,19 +304,19 @@ In addition to being able to index and replace documents, we can also update the
 
  
 
-1.       Update the previous document (ID of 1) by changing the name field to "Jane Doe":
+1.  Update the previous document (ID of 1) by changing the name field to "Jane Doe":
 
   ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_17.png)
 
  
 
-2.       This example shows how to update our previous document (ID of 1) by changing the name field to "Jane Doe" and at the same time add an age field to it:
+2.  This example shows how to update our previous document (ID of 1) by changing the name field to "Jane Doe" and at the same time add an age field to it:
 
  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_18.png)
 
  
 
-3.       Updates can also be performed by using simple scripts.  This example uses a script to increment the age by 5:
+3.  Updates can also be performed by using simple scripts.  This example uses a script to increment the age by 5:
 
  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_19.png)
 
@@ -332,7 +332,7 @@ In the above, ctx._source refers to the current source document that is about to
 
  
 
-1.       Deleting documents is fairly straightforward.  This example shows how to delete our previous customer with ID of 2:
+1.  Deleting documents is fairly straightforward.  This example shows how to delete our previous customer with ID of 2:
 
  
 
@@ -350,9 +350,9 @@ In addition to being able to index, update and delete individual documents, Elas
 
 The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one bulk operation:
 
-*$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}`n{'name':'Jane Doe'}`n".Replace("'","`"")*
+$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}\`n{'name':'John Doe'}\`n{'index':{'_index':'customer','_type':'external','_id':'2'}}\`n{'name':'Jane Doe'}\`n".Replace("'","`"")
 
-*Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'*
+Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -360,7 +360,7 @@ The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one
 
 The following example updates the first document (ID of 1) and then deletes the second document (ID of 2) in one bulk operation:
 
-$Body = "{'update':{'_index':'customer','_type':'external','_id':'1'}}`n{'doc':{'name':'John Doe becomes Jane Doe'}}`n{'delete':{'_index':'customer','_type':'external','_id':'2'}}`n".Replace("'","`"")
+$Body = "{'update':{'_index':'customer','_type':'external','_id':'1'}}\`n{'doc':{'name':'John Doe becomes Jane Doe'}}\`n{'delete':{'_index':'customer','_type':'external','_id':'2'}}\`n".Replace("'","`"")
 
 Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
@@ -380,38 +380,36 @@ The [Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/d
 
 We will now work with a more realistic dataset, through a sample of fictitious JSON documents of customer bank account information.  Each document has the following schema:
 
-{
-    "account_number": 0,
-    "balance": 16623,
-    "firstname": "Bradshaw",
-    "lastname": "Mckenzie",
-    "age": 29,
-    "gender": "F",
-    "address": "244 Columbus Place",
-    "employer": "Euron",
-    "email": "bradshawmckenzie@euron.com",
-    "city": "Hobucken",
-    "state": "CO"
-}
+  '{
+      "account_number": 0,
+      "balance": 16623,
+      "firstname": "Bradshaw",
+      "lastname": "Mckenzie",
+      "age": 29,
+      "gender": "F",
+      "address": "244 Columbus Place",
+      "employer": "Euron",
+      "email": "bradshawmckenzie@euron.com",
+      "city": "Hobucken",
+      "state": "CO"
+  }'
 
 Data generated from [http://www.json-generator.com/](http://www.json-generator.com/) so ignore actual values and semantics of data as these are all randomly generated.
 
 ### Loading the Sample Dataset:
 
-1.    Download the sample dataset (accounts.json)[ here](https://github.com/elastic/elasticsearch/blob/master/docs/src/test/resources/accounts.json?raw=true).  Extract the file to your current directory
-and load the file into the cluster with the following command:
+1.  Download the sample dataset (accounts.json)[ here](https://github.com/elastic/elasticsearch/blob/master/docs/src/test/resources/accounts.json?raw=true).  
+Extract the file to your current directory and load the file into the cluster with the following command:
 
-**Invoke-WebRequest ****-Method**** ****POST ****-Uri**** ****"****[http://localhost:9200/bank/account/_bulk?pretty&refres**h](http://localhost:9200/bank/account/_bulk?pretty&refresh)**" ****-InFile**** ****accounts.json**
+  Invoke-WebRequest -Method POST -Uri "http://localhost:9200/bank/account/_bulk?pretty&refresh" -InFile accounts.json
 
-** **
 
-2.   	List and review the imported indices with the following command:
+2.  List and review the imported indices with the following command:
 
-**Invoke-WebRequest**** ****–Method**** ****GET**** ****–Uri**** ****http://localhost:9200/_cat/indices?v**** ****|**** ****Select**** ****Content**** ****|**** ****Format-List**
+  Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
-** **
 
-3.       The output will look similar to the following:
+3.  The output will look similar to the following:
 
  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_23.png)
 
@@ -423,13 +421,13 @@ Which means that we successfully bulk indexed 1000 documents into the bank index
 
 There are two basic ways to run searches:  one is by sending search parameters through the[ REST request URI](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html), and the other by sending them through the[ REST request body](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html).  The request body method allows you to be more expensive and also to define your searches in a more readable JSON format.  We will do one example of the request URI method, but the remainder of the tutorial will exclusively use the request body method.
 
-1.       The REST API for search is accessible from the _search endpoint.  This command returns all documents in the bank index:
+1.  The REST API for search is accessible from the _search endpoint.  This command returns all documents in the bank index:
 
-Invoke-WebRequest -Method GET -Uri "http://localhost:9200/bank/_search?q=*&sort=account_number:asc&pretty" | Select Content | Format-list
+  Invoke-WebRequest -Method GET -Uri "http://localhost:9200/bank/_search?q=*&sort=account_number:asc&pretty" | Select Content | Format-list
 
  
 
-2.       With the above command, we search (_search endpoint) in the bank index, and the *q=** parameter instructs Elasticsearch to match all documents in the index.  The *sort=account_number:asc *parameter indicates to sort the results using the *account_number *field of each document in ascending order.  The *pretty *parameter tells Elasticsearch to return pretty-printed JSON results:
+2.  With the above command, we search (_search endpoint) in the bank index, and the *q=** parameter instructs Elasticsearch to match all documents in the index.  The *sort=account_number:asc *parameter indicates to sort the results using the *account_number *field of each document in ascending order.  The *pretty *parameter tells Elasticsearch to return pretty-printed JSON results:
 
  
 
@@ -437,7 +435,7 @@ Invoke-WebRequest -Method GET -Uri "http://localhost:9200/bank/_search?q=*&sort=
 
  
 
-3.       In the response, we see the following parts:
+3.  In the response, we see the following parts:
 
 ·         *took* – the time in milliseconds for Elasticsearch to execute the search.
 
@@ -457,23 +455,20 @@ Invoke-WebRequest -Method GET -Uri "http://localhost:9200/bank/_search?q=*&sort=
 
  
 
-4.       Here is the same exact search using the alternative request body method:
+4.  Here is the same exact search using the alternative request body method:
 
-$body = '{
-
+    $body = '{
       "query": { "match_all": {} },
-
       "sort": [ { "account_number": "asc" } ]
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_25.png)
 
-The difference here is that instead of passing the q=* in the URI, we **POST **a JSON style query request to the* _search* API.  Once you get results back, Elasticsearch is completely done with the request and does not maintain any kind of server-side resources or open cursors into the results.
+The difference here is that instead of passing the q=* in the URI, we **POST** a JSON style query request to the *_search* API.  Once you get results back, Elasticsearch is completely done with the request and does not maintain any kind of server-side resources or open cursors into the results.
 
 ## Introducing the Query Language:
 
@@ -491,31 +486,23 @@ Helpful Powershell DSL links:
 
 [https://kevinmarquette.github.io/2017-03-13-Powershell-DSL-design-patterns/](https://kevinmarquette.github.io/2017-03-13-Powershell-DSL-design-patterns/)
 
-1.   In the previous section, we executed the following query:
+1.  In the previous section, we executed the following query:
 
     $body = '{
-
       "query": { "match_all": {} },
-
       "sort": [ { "account_number": "asc" } ]
-
     }'
 
 As above, the query part indicates what our query definition is, and the match_all part is simply the type of query that we want to run.  The match_all is a query for all documents in the specified index.
 
 2.  We can also create an array for the Body in the above command, where we specify various parameters.  In the example below we pass the size parameter:
 
-$body = '{
-
+    $body = '{
       "query": { "match_all": {} },
-
       "size": 1
+    }'
 
-      }'
-
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -523,39 +510,28 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 This will only list the first 2 results.  Note, that if you do not specify a size parameter, it defaults to 10.
 
-3.     In the following example we return documents 11 through to 20:
+3.  In the following example we return documents 11 through to 20:
 
-$body = '{
-
+    $body = '{
       "query": { "match_all": {} },
-
       "from": 10,
-
       "size": 10
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-The *from *parameter (0-based) specifies which document index to start from and the* size *parameter specifies how many documents to return starting at the *from *parameter.  This feature is useful when implementing paging of search results.  Note that if from is not specified, it defaults to 0.
+The *from* parameter (0-based) specifies which document index to start from and the *size* parameter specifies how many documents to return starting at the *from* parameter.  This feature is useful when implementing paging of search results.  Note that if from is not specified, it defaults to 0.
 
 4.  This example does a match and sorts the results by account balance in descending order and returns the top 10 (default size) documents:
 
-$body = '{
-
+    $body = '{
       "query": { "match_all": {} },
-
       "sort": { "balance": { "order": "desc" } }
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -565,113 +541,81 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/_executing_searches.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/_executing_searches.html)
 
-Let's dig some more into the Query DSL.  By default, the full JSON document is returned as part of all searches.  This is referred to as the source (*_source *field in the search hits).  If we don’t want the entire source document returned, we have the ability to request only a few fields from within the source to be returned.  
+Let's dig some more into the Query DSL.  By default, the full JSON document is returned as part of all searches.  This is referred to as the source (*_source* field in the search hits).  If we don’t want the entire source document returned, we have the ability to request only a few fields from within the source to be returned.  
 
-1. Below shows how to return two fields, *account_number *and *balance *(inside *_source*), from the search:
+1.  Below shows how to return two fields, *account_number* and *balance* (inside *_source*), from the search:
 
-$body = '{
-
+    $body = '{
       "query": { "match_all": {} },
-
       "_source": ["account_number", "balance"]
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
 # ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_28.png)
 
-Note that the above simply reduces the *_source *field.  It will still only return one field named *_source *but within it, only fields *account_number *and *balance *are included.
+Note that the above simply reduces the *_source* field.  It will still only return one field named *_source* but within it, only fields *account_number* and *balance* are included.
 
 if you are from a SQL background, the above is somewhat similar in concept to the *SQL SELECT FROM* field list.
 
-We have seen how the *match_all *query is used to match all documents.  Let's now introduce a new query called the [match query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html), which can be thought of as a basic fielded search query (i.e. a search done against a specific field or set of fields).
+We have seen how the *match_all* query is used to match all documents.  Let's now introduce a new query called the [match query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html), which can be thought of as a basic fielded search query (i.e. a search done against a specific field or set of fields).
 
 2.  This example returns the account numbered 20:
 
-$body = '{
-
+    $body = '{
       "query": { "match": { "account_number": 20 } }
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
 3.  This example returns all the accounts containing the term "mill" in the address:
 
-$body = '{
-
+    $body = '{
       "query": { "match": { "address": "mill" } }
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-4.  This example returns all accounts containing the term "mill" or “lane” in the address:
+4.  This example returns all accounts containing the term "mill" or "lane" in the address:
 
-$body = '{
-
+    $body = '{
       "query": { "match": { "address": "mill lane" } }
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-5.   This example is a variant of *match *(*match_phrase*) that returns all accounts containing the phrase "mill lane" in the address:
+5.  This example is a variant of *match* (*match_phrase*) that returns all accounts containing the phrase "mill lane" in the address:
 
-$body = '{
-
+    $body = '{
       "query": { "match_phrase": { "address": "mill lane" } }
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-6.  Let's introduce the [bool (ean) query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html).  The *bool *query allows us to compose smaller queries into bigger queries using boolean logic.  This example composes two *match *queries and returns all accounts containing "mill" and “lane” in the address:
+6.  Let's introduce the [bool (ean) query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html).  The *bool* query allows us to compose smaller queries into bigger queries using boolean logic.  This example composes two *match* queries and returns all accounts containing "mill" and "lane" in the address:
 
-$body = '{
-
+    $body = '{
       "query": {
-
         "bool": {
-
           "must": [
-
             { "match": { "address": "mill" } },
-
             { "match": { "address": "lane" } }
-
           ]
-
         }
-
       }
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -679,95 +623,60 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 In the example above, the *bool must* clause specifies all queries that must be true for a documents to be considered a match
 
-7.  In contrast, this example composes two *match *queries and returns all accounts containing "mill" or “lane” in the address:
+7.  In contrast, this example composes two *match* queries and returns all accounts containing "mill" or "lane" in the address:
 
-$body = '{
-
+    $body = '{
       "query": {
-
         "bool": {
-
           "should": [
-
             { "match": { "address": "mill" } },
-
             { "match": { "address": "lane" } }
-
           ]
-
         }
-
       }
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
 The *bool should* clause specifies a list of queries either of which must be true for a document to be considered a match.
 
-8.  This example composes two match queries and returns all the accounts that contain neither "mill" nor “lane” in the address:
+8.  This example composes two match queries and returns all the accounts that contain neither "mill" nor "lane" in the address:
 
-$body = '{
-
+    $body = '{
       "query": {
-
         "bool": {
-
           "must_not": [
-
             { "match": { "address": "mill" } },
-
             { "match": { "address": "lane" } }
-
           ]
-
         }
-
       }
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-The bool *must_not *clause specifies a list of queries none of which must be true for a document to be considered a match.  You can combine *must*, *should *and *must_not *clauses simultaneously inside a *bool *query.  Furthermore, we can compose *bool *queries inside any of these *bool *clauses to mimic any complex multi-level boolean logic.
+The bool *must_not* clause specifies a list of queries none of which must be true for a document to be considered a match.  You can combine *must*, *should* and *must_not* clauses simultaneously inside a *bool* query.  Furthermore, we can compose *bool* queries inside any of these *bool* clauses to mimic any complex multi-level boolean logic.
 
 9.  This example returns all accounts of anybody who is 40 years old, but doesn't live in ID(aho):
 
-$body = '{
-
+    $body = '{
       "query": {
-
         "bool": {
-
           "must": [
-
             { "match": { "age": "40" } }
-
           ],
-
           "must_not": [
-
             { "match": { "state": "ID" } }
-
           ]
-
         }
-
       }
-
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
-
-    select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -777,7 +686,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/_executing_filters.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/_executing_filters.html) 
 
-In the previous section, we skipped over a little detail called the document score (_score field in the search results).  The score is a numeric value that is a relative measure of how well the document matches the search query that was specified.  The higher the score, the more relevant the document is, the lower the score, the less relevant the document is.
+In the previous section, we skipped over a little detail called the document score (*_score* field in the search results).  The score is a numeric value that is a relative measure of how well the document matches the search query that was specified.  The higher the score, the more relevant the document is, the lower the score, the less relevant the document is.
 
 Queries don't always need to produce a score, in particular when they are only used for "filtering" the document set.  Elasticsearch detects these situations and automatically optimizes query execution in order not to compute useless scores.
 
@@ -785,9 +694,9 @@ The [bool query](https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 This example uses a bool query to return all accounts with balances between 20000 and 30000, inclusive.  We want to find accounts with a balance that is greater than or equal to 20000 and less than 30000.
 
-$body = '{ "query": { "bool": { "must": { "match_all": {} }, "filter": { "range": { "balance": { "gte": 20000, "lte": 30000 } }}}}}'
+   $body = '{ "query": { "bool": { "must": { "match_all": {} }, "filter": { "range": { "balance": { "gte": 20000, "lte": 30000 } }}}}}'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
+   Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 Dissecting the above, the bool query contains a match_all query (the query part) and a range query (the filter part).  We can substitute any other queries into the query and the filter parts.  In the case above, the range query makes perfect sense since documents falling into the range all match "equally", i.e. no document is more relevant than the other.
 
@@ -799,29 +708,20 @@ Since we already have a basic understanding of how they work, it shouldn't be to
 
 Aggregations provide the ability to group and extract statistics from data.  In Elasticsearch, you have the ability to execute searches returning hits and at the same time return aggregated results separate from the hits all in one response.  This is very powerful and efficient in the sense that you can run queries and multiple aggregations and the the results back of bother (or either) operations in one shot avoiding network roundtrips using a concise and simplified API.
 
-1. This example groups all accounts by state, and then returns the top 10 (default) states sorted by count descending (also default):
+1.  This example groups all accounts by state, and then returns the top 10 (default) states sorted by count descending (also default):
 
-$body = '{
-
-  "size": 0,
-
-  "aggs": {
-
-    "group_by_state": {
-
-      "terms": {
-
-        "field": "state.keyword"
-
+    $body = '{
+     "size": 0,
+      "aggs": {
+        "group_by_state": {
+          "terms": {
+            "field": "state.keyword"
+          }
+        }
       }
+    }'
 
-    }
-
-  }
-
-}'
-
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_31.png)
 
@@ -833,169 +733,97 @@ We can see 27 accounts in ID (Idaho), followed by 27 accounts in TX (Texas), fol
 
 Note that we set size=0 to not show search hits because we only want to see the aggregation results in the response.
 
-2. Building on the previous aggregation, this example calculates the average account balance by state (again only the top 10 states sorted by count in descending order):
+2.  Building on the previous aggregation, this example calculates the average account balance by state (again only the top 10 states sorted by count in descending order):
 
-$body = '{
-
-  "size": 0,
-
-  "aggs": {
-
-    "group_by_state": {
-
-      "terms": {
-
-        "field": "state.keyword"
-
-      },
-
+    $body = '{
+      "size": 0,
       "aggs": {
-
-        "average_balance": {
-
-          "avg": {
-
-            "field": "balance"
-
+        "group_by_state": {
+          "terms": {
+            "field": "state.keyword"
+          },
+          "aggs": {
+            "average_balance": {
+              "avg": {
+                "field": "balance"
+              }
+            }
           }
-
         }
-
       }
+    }'
 
-    }
-
-  }
-
-}'
-
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 Notice how we nested the average_balance aggregation inside the group_by_state aggregation.  This is a common pattern for all aggregations.  You can nest aggregation inside aggregations arbitrarily to extract pivoted summarizations that you require from your data.
 
-3. Building on the previous aggregation, let's sort on the average balance in descending order:
+3.  Building on the previous aggregation, let's sort on the average balance in descending order:
 
-$body = '{
-
-  "size": 0,
-
-  "aggs": {
-
-    "group_by_state": {
-
-      "terms": {
-
-        "field": "state.keyword",
-
-        "order": {
-
-          "average_balance": "desc"
-
-        }
-
-      },
-
+    $body = '{
+      "size": 0,
       "aggs": {
-
-        "average_balance": {
-
-          "avg": {
-
-            "field": "balance"
-
-          }
-
-        }
-
-      }
-
-    }
-
-  }
-
-}'
-
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
-
-4. This example shows how we can group by age and brackets (ages 20-29, 30-39 and 40-49), then by gender, and finally get the average account balance, per age bracket, per gender:
-
-$body = '{
-
-  "size": 0,
-
-  "aggs": {
-
-    "group_by_age": {
-
-      "range": {
-
-        "field": "age",
-
-        "ranges": [
-
-          {
-
-            "from": 20,
-
-            "to": 30
-
-          },
-
-          {
-
-            "from": 30,
-
-            "to": 40
-
-          },
-
-          {
-
-            "from": 40,
-
-            "to": 50
-
-          }
-
-        ]
-
-      },
-
-      "aggs": {
-
-        "group_by_gender": {
-
+        "group_by_state": {
           "terms": {
-
-            "field": "gender.keyword"
-
-          },
-
-          "aggs": {
-
-            "average_balance": {
-
-              "avg": {
-
-                "field": "balance"
-
-              }
-
+            "field": "state.keyword",
+            "order": {
+              "average_balance": "desc"
             }
-
+          },
+          "aggs": {
+            "average_balance": {
+              "avg": {
+                "field": "balance"
+              }
+            }
           }
-
         }
-
       }
+    }'
 
-    }
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-  }
+4.  This example shows how we can group by age and brackets (ages 20-29, 30-39 and 40-49), then by gender, and finally get the average account balance, per age bracket, per gender:
 
-}'
+    $body = '{
+      "size": 0,
+      "aggs": {
+        "group_by_age": {
+          "range": {
+            "field": "age",
+            "ranges": [
+              {
+                "from": 20,
+                "to": 30
+              },
+              {
+                "from": 30,
+                "to": 40
+              },
+              {
+                "from": 40,
+                "to": 50
+              }
+            ]
+          },
+          "aggs": {
+            "group_by_gender": {
+              "terms": {
+                "field": "gender.keyword"
+              },
+              "aggs": {
+                "average_balance": {
+                  "avg": {
+                    "field": "balance"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 The [aggregations reference guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html) is a great starting point if you want to do further experimentation.
 
@@ -1075,7 +903,7 @@ Powershell also has an alias called curl, not to be confused with the 3rd party 
 
 ## Sense:
 
-*[https://www.elastic.co/guide/en/sense/current/introduction.htm*l](https://www.elastic.co/guide/en/sense/current/introduction.html)
+[https://www.elastic.co/guide/en/sense/current/introduction.htm*l](https://www.elastic.co/guide/en/sense/current/introduction.html)
 
 *Sense is a handy console for interacting with the REST API of Elasticsearch. As you can see below, Sense is composed of two main panes. The left pane, named the editor, is where you type the requests you will submit to Elasticsearch. The responses from Elasticsearch are shown on the right hand panel. The address of your Elasticsearch server should be entered in the text box on the top of screen (and defaults to **localhost:9200**).*
 
@@ -1093,21 +921,21 @@ As for the Getting started section of this document, we won't have Kibana instal
 
 JSON to PowerShell Conversion Notes:
 
-1. **: **becomes **=**
+1. **:** becomes **=**
 
 2. all ending commas go away
 
-    1. **newlines denote new properties**
+    **newlines denote new properties**
 
-3. **@** before all new objects (e.g.** {}**)
+3. **@** before all new objects (e.g. **{}**)
 
 4. **[]** becomes **@()**
 
-    2. **@() is PowerShell for array**
+     **@() is PowerShell for array**
 
 5. **"** becomes **""**
 
-    3. **PowerShell escaping is double-double quotes**
+     **PowerShell escaping is double-double quotes**
 
 **DO NOT FORGET THE @ BEFORE {**. If you do, it will sit there forever as it tries to serialize nothing into nothing. After a few minutes, you'll get hundreds of thousands of JSON entries. Seriously. It tries to serialize every aspect of every .NET property forever. This is why the -Depth defaults to 2.
 
