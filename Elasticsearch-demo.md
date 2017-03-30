@@ -116,7 +116,7 @@ For the purpose of this document, we used **Java 8u112.**
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_0.png)
 
-	Click OK and close all windows.
+Click OK and close all windows.
 
 4.  Browse to [https://www.elastic.co/downloads/elasticsearch](https://www.elastic.co/downloads/elasticsearch) and download the ElasticSearch version 5.0.0 zip file.
 
@@ -124,15 +124,15 @@ For the purpose of this document, we used **Java 8u112.**
 
 6. Open a Command or Powershell window, and navigate to the extracted folder, then the \bin folder:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_1.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_1.png)
 
 7. Execute the elasticsearch.bat file:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_2.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_2.png)
 
 8. Output should look similar to the following:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_3.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_3.png)
 
 ## Exploring Your Cluster:
 
@@ -150,7 +150,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 2. The response would look similar to the following:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_4.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_4.png)
 
 3. Get a list of nodes with the following command:
 
@@ -158,7 +158,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 4. The output should look similar to the following:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_5.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_5.png)
 
 ### List All Indices:
 
@@ -170,7 +170,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 2.  The output should look similar to the following:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_6.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_6.png)
 
 The above indicates that there are no indices yet in the cluster.
 
@@ -184,7 +184,7 @@ The above indicates that there are no indices yet in the cluster.
 
 Output as follows:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_7.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_7.png)
 
 2. List the indexes again with the following command:
 
@@ -192,7 +192,7 @@ Output as follows:
 
 Output as follows:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_8.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_8.png)
 
 ### Index and Query a Document:
 
@@ -212,7 +212,7 @@ As we are getting into more complex commands/scripts in Powershell, it is advise
 
 2. The output will look similar to the following:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_9.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_9.png)
 
 The above indicates that a new customer document was successfully created inside the customer index and external type. Note:  Elasticsearch does not require you to explicitly create an index first before you can create documents into it.  Elasticsearch will automatically create the customer index if it didn't already exist beforehand.
 
@@ -222,7 +222,7 @@ The above indicates that a new customer document was successfully created inside
 
 4. The output should look similar to the following:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_10.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_10.png)
 
  
 
@@ -236,7 +236,7 @@ The above indicates that a new customer document was successfully created inside
 
 2. The output should look as follows:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_11.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_11.png)
 
 3. List all indexes with the following command:
 
@@ -244,7 +244,7 @@ The above indicates that a new customer document was successfully created inside
 
 4. With output as follows:
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_12.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_12.png)
 
 ## Modifying your Data:
 
@@ -262,7 +262,7 @@ Elasticsearch provides data manipulation and search capabilities in near real ti
 
  
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_13.png) 
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_13.png) 
 
 The above will index the specified document into a customer index, external type and with ID of 1.  
 
@@ -270,7 +270,7 @@ The above will index the specified document into a customer index, external type
 
 2.  	If the above command is executed again with a different (or same) document, Elasticsearch will replace (ie. reindex) a new document on top of the existing one with the ID of 1: 
 
- ![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_14.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_14.png)
 
  
 
@@ -278,7 +278,7 @@ The above will index the specified document into a customer index, external type
 
  
 
-![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_15.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_15.png)
 
 The above indexes a new document with an ID of 2.
 
@@ -288,7 +288,7 @@ The above indexes a new document with an ID of 2.
 
 5.       This example shows how to index a document without an explicit ID:
 
-  ![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_16.png)
+  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_16.png)
 
 Note that in the above case, we are using the **POST **verb instead of **PUT **since we didn't specify an ID.
 
@@ -306,19 +306,19 @@ In addition to being able to index and replace documents, we can also update the
 
 1.       Update the previous document (ID of 1) by changing the name field to "Jane Doe":
 
-  ![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_17.png)
+  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_17.png)
 
  
 
 2.       This example shows how to update our previous document (ID of 1) by changing the name field to "Jane Doe" and at the same time add an age field to it:
 
- ![image alt text](https://github.com/leo246/Elastic_Windows/tree/master/public/6lSb1O50J2gMLrZwAnZl8Q_img_18.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_18.png)
 
  
 
 3.       Updates can also be performed by using simple scripts.  This example uses a script to increment the age by 5:
 
- ![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_19.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_19.png)
 
  
 
@@ -336,7 +336,7 @@ In the above, ctx._source refers to the current source document that is about to
 
  
 
- ![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_20.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_20.png)
 
 See the[ Delete By Query API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html) to delete all documents matching a specific query.  It is much more efficient to delete a whole index instead of just deleting all documents with the Delete by Query API.
 
@@ -356,7 +356,7 @@ The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_21.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_21.png)
 
 The following example updates the first document (ID of 1) and then deletes the second document (ID of 2) in one bulk operation:
 
@@ -366,7 +366,7 @@ Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Bo
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_22.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_22.png)
 
 Note above that for the delete action, there is no corresponding source document after it since deletes only require the ID of the document to be deleted.
 
@@ -413,7 +413,7 @@ and load the file into the cluster with the following command:
 
 3.       The output will look similar to the following:
 
- ![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_23.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_23.png)
 
 Which means that we successfully bulk indexed 1000 documents into the bank index.
 
@@ -433,7 +433,7 @@ Invoke-WebRequest -Method GET -Uri "http://localhost:9200/bank/_search?q=*&sort=
 
  
 
- ![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_24.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_24.png)
 
  
 
@@ -471,7 +471,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_25.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_25.png)
 
 The difference here is that instead of passing the q=* in the URI, we **POST **a JSON style query request to the* _search* API.  Once you get results back, Elasticsearch is completely done with the request and does not maintain any kind of server-side resources or open cursors into the results.
 
@@ -519,7 +519,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_26.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_26.png)
 
 This will only list the first 2 results.  Note, that if you do not specify a size parameter, it defaults to 10.
 
@@ -559,7 +559,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_27.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_27.png)
 
 ## Executing Searches:
 
@@ -583,7 +583,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-# ![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_28.png)
+# ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_28.png)
 
 Note that the above simply reduces the *_source *field.  It will still only return one field named *_source *but within it, only fields *account_number *and *balance *are included.
 
@@ -675,7 +675,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_29.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_29.png)
 
 In the example above, the *bool must* clause specifies all queries that must be true for a documents to be considered a match
 
@@ -771,7 +771,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_30.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_30.png)
 
 ## Executing Filters:
 
@@ -823,7 +823,7 @@ $body = '{
 
 Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_31.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_31.png)
 
 In SQL, the above aggregation is similar in concept to:
 
@@ -1071,7 +1071,7 @@ Slightly out of scope for this document, you could install cURL for Windows by f
 
 Powershell also has an alias called curl, not to be confused with the 3rd party application cURL above.
 
-![image alt text](https://github.com/leo246/Elastic_Windows/public/6lSb1O50J2gMLrZwAnZl8Q_img_32.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_32.png)
 
 ## Sense:
 
