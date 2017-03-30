@@ -419,7 +419,7 @@ Invoke-WebRequest -Method GET -Uri "http://localhost:9200/bank/_search?q=*&sort=
 
  
 
-2.  With the above command, we search (_search endpoint) in the bank index, and the *q=** parameter instructs Elasticsearch to match all documents in the index.  The *sort=account_number:asc *parameter indicates to sort the results using the *account_number *field of each document in ascending order.  The *pretty *parameter tells Elasticsearch to return pretty-printed JSON results:
+2.  With the above command, we search (_search endpoint) in the bank index, and the *q=** parameter instructs Elasticsearch to match all documents in the index.  The sort=account_number:asc parameter indicates to sort the results using the account_number field of each document in ascending order.  The pretty parameter tells Elasticsearch to return pretty-printed JSON results:
 
  
 
@@ -449,7 +449,7 @@ Invoke-WebRequest -Method GET -Uri "http://localhost:9200/bank/_search?q=*&sort=
 
 4.  Here is the same exact search using the alternative request body method:
 
-$body = '{
+    $body = '{
 
       "query": { "match_all": {} },
 
@@ -457,7 +457,7 @@ $body = '{
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select       content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -495,7 +495,7 @@ As above, the query part indicates what our query definition is, and the match_a
 
 2.  We can also create an array for the Body in the above command, where we specify various parameters.  In the example below we pass the size parameter:
 
-$body = '{
+      $body = '{
 
       "query": { "match_all": {} },
 
@@ -503,9 +503,9 @@ $body = '{
 
       }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+     Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
-    select content | format-list
+     select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -515,7 +515,7 @@ This will only list the first 2 results.  Note, that if you do not specify a siz
 
 3.  In the following example we return documents 11 through to 20:
 
-$body = '{
+     $body = '{
 
       "query": { "match_all": {} },
 
@@ -523,11 +523,11 @@ $body = '{
 
       "size": 10
 
-    }'
+     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+     Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
-    select content | format-list
+     select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -535,7 +535,7 @@ The *from *parameter (0-based) specifies which document index to start from and 
 
 4.  This example does a match and sorts the results by account balance in descending order and returns the top 10 (default size) documents:
 
-$body = '{
+    $body = '{
 
       "query": { "match_all": {} },
 
@@ -543,7 +543,7 @@ $body = '{
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
     select content | format-list
 
@@ -559,7 +559,7 @@ Let’s dig some more into the Query DSL.  By default, the full JSON document is
 
 1.  Below shows how to return two fields, *account_number *and *balance *(inside *_source*), from the search:
 
-$body = '{
+    $body = '{
 
       "query": { "match_all": {} },
 
@@ -567,7 +567,7 @@ $body = '{
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
     select content | format-list
 
@@ -583,13 +583,13 @@ We have seen how the *match_all *query is used to match all documents.  Let’s 
 
 2.  This example returns the account numbered 20:
 
-$body = '{
+    $body = '{
 
       "query": { "match": { "account_number": 20 } }
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
     select content | format-list
 
@@ -597,13 +597,13 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 3.  This example returns all the accounts containing the term "mill" in the address:
 
-$body = '{
+    $body = '{
 
       "query": { "match": { "address": "mill" } }
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
     select content | format-list
 
@@ -611,13 +611,13 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 4.  This example returns all accounts containing the term "mill" or “lane” in the address:
 
-$body = '{
+    $body = '{
 
       "query": { "match": { "address": "mill lane" } }
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
     select content | format-list
 
@@ -625,13 +625,13 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 5.  This example is a variant of *match *(*match_phrase*) that returns all accounts containing the phrase "mill lane" in the address:
 
-$body = '{
+    $body = '{
 
       "query": { "match_phrase": { "address": "mill lane" } }
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
     select content | format-list
 
@@ -639,7 +639,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 6.  Let’s introduce the [bool (ean) query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html).  The *bool *query allows us to compose smaller queries into bigger queries using boolean logic.  This example composes two *match *queries and returns all accounts containing "mill" and “lane” in the address:
 
-$body = '{
+    $body = '{
 
       "query": {
 
@@ -659,7 +659,7 @@ $body = '{
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
     select content | format-list
 
@@ -671,7 +671,7 @@ In the example above, the *bool must* clause specifies all queries that must be 
 
 7.  In contrast, this example composes two *match *queries and returns all accounts containing "mill" or “lane” in the address:
 
-$body = '{
+    $body = '{
 
       "query": {
 
@@ -691,7 +691,7 @@ $body = '{
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
     select content | format-list
 
@@ -701,7 +701,7 @@ The *bool should* clause specifies a list of queries either of which must be tru
 
 8.  This example composes two match queries and returns all the accounts that contain neither "mill" nor “lane” in the address:
 
-$body = '{
+    $body = '{
 
       "query": {
 
@@ -721,7 +721,7 @@ $body = '{
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
     select content | format-list
 
@@ -731,7 +731,7 @@ The bool *must_not *clause specifies a list of queries none of which must be tru
 
 9.  This example returns all accounts of anybody who is 40 years old, but doesn’t live in ID(aho):
 
-$body = '{
+    $body = '{
 
       "query": {
 
@@ -755,7 +755,7 @@ $body = '{
 
     }'
 
-Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
+    Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | 
 
     select content | format-list
 
