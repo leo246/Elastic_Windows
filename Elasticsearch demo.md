@@ -342,7 +342,7 @@ In addition to being able to index, update and delete individual documents, Elas
 
 The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one bulk operation:
 
-*$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}`n{'name':'Jane Doe'}`n".Replace("'","`"")*
+*$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}``n{'name':'John Doe'}``n{'index':{'_index':'customer','_type':'external','_id':'2'}}``n{'name':'Jane Doe'}``n".Replace("'","`"")*
 
 Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
