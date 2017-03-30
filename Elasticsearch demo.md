@@ -352,7 +352,7 @@ Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Bo
 
 The following example updates the first document (ID of 1) and then deletes the second document (ID of 2) in one bulk operation:
 
-*$Body = "{'update':{'_index':'customer','_type':'external','_id':'1'}}`n{'doc':{'name':'John Doe becomes Jane Doe'}}`n{'delete':{'_index':'customer','_type':'external','_id':'2'}}`n".Replace("'","`"")*
+$Body = "{'update':{'_index':'customer','_type':'external','_id':'1'}}\`n{'doc':{'name':'John Doe becomes Jane Doe'}}\`n{'delete':{'_index':'customer','_type':'external','_id':'2'}}\`n".Replace("'","`"")
 
 Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
