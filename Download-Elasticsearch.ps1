@@ -30,7 +30,7 @@ Function Download-ElasticSearch {
         Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
 
         Write-Verbose "Extracting downloaded zip file to same location"
-        Expand-Archive "D:\tmp\elasticsearch-5.3.0.zip" -DestinationPath $Destination
+        Expand-Archive "$Destination\elasticsearch-5.3.0.zip" -DestinationPath $Destination
     }
     End {
 
