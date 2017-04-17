@@ -30,7 +30,7 @@ Function Download-Kibana {
         Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
 
         Write-Verbose "Extracting downloaded zip file to same location"
-        Expand-Archive "D:\tmp\kibana-5.3.0-windows-x86.zip" -DestinationPath $Destination
+        Expand-Archive "$Destination\kibana-5.3.0-windows-x86.zip" -DestinationPath $Destination
     }
     End {
 
