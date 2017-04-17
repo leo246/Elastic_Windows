@@ -12,7 +12,7 @@ Function Download-JavaJDK {
     [cmdletbinding()]
     Param (
         [Parameter(mandatory=$true,HelpMessage="Enter destination path")]
-        [string] $destination = "c:\temp"
+        [string] $destination
     )
 
     Begin {
