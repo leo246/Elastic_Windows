@@ -5,7 +5,7 @@ Function Build-ElasticsearchNode {
             [string] $destination
         )
         
-        #Download-JavaJDK -destination $destination
+        Download-JavaJDK -destination $destination
         Download-ElasticSearch -Destination $destination
         Download-Kibana -Destination $destination
 }
