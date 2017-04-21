@@ -1015,7 +1015,7 @@ The configuration formats is [YAML](http://www.yaml.org/).  Here is an example o
 	path:
 	data:  c:\ES\data
 		logs:  c:\ES\logs
-	Settings can also be flattened as follows:
+Settings can also be flattened as follows:
 	path.data:  c:\ES\data
 	path.logs:  c:\ES\logs
 
@@ -1095,7 +1095,7 @@ Multiple configuration files can be loaded (in which case they will get merged) 
 
 In addition to regular logging, Elasticsearch allows one to enable logging of deprecated actions.  For example, this allows one to determine early, if you need to migrate certain functionality in the future.  By default, deprecation logging is enabled at the WARN level, the level at which all deprecation log messages will be emitted.
 
-logger.deprecation.level = warn
+	logger.deprecation.level = warn
 
 This will create daily rolling deprecation log file in the log directory.  Check this file regularly, especially when intend to upgrade to a new major version.  The default logging configuration has set the roll policy for the deprecation logs to roll and compress after 1GB, and to preserve a maximum of five log files (four rolled, and one active log).  Disable this in the *\config\log4j2.properties* file by setting the deprecation log level to error.
 
@@ -1105,7 +1105,7 @@ This will create daily rolling deprecation log file in the log directory.  Check
 
 While Elasticsearch require very little configuration, there are a number of settings which needs to be configured manually and should definitely be configured before going into production.
 
-## *path.data* and *path.logs*:
+	## *path.data* and *path.logs*:
 
 If you are using the *.zip* or *.tar.gz* archives, the data and logs directories are subfolders of *%ES_HOME%*.  If these important folders are left in their default locations, there is a high risk of them being deleted while upgrading Elasticsearch to a new version.  In production use, change the locations of the data and log folder:
 
@@ -1151,10 +1151,10 @@ The network.host setting also understands some special values as* _local_*,* _si
 
 Out of the box, without any network configurations, Elasticsearch will bind to the available loopback addresses and will scan ports 9300 to 9305 to try and connect to order nodes running on the same server.  This provides an auto-clustering experience without having to do any configuration.  When the need arise to form a cluster with nodes on other servers, you have to provide a seed list of other nodes in the cluster that are likely to be live and contactable.  This can be specified as follows:
 
-discovery.zen.ping.unicast.hosts:
-   - 192.168.1.10:9300
-   - 192.168.1.11 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_49.png)
-   - seeds.mydomain.com ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_50.png)
+	discovery.zen.ping.unicast.hosts:
+	   - 192.168.1.10:9300
+	   - 192.168.1.11 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_49.png)
+	   - seeds.mydomain.com ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_50.png)
 
 1. The port will default to *transport.profiles.default.port* and fallback to *transport.tcp.port* if not supported.
 2. A hostname that resolves to multiple IP addresses will try all resolved addresses.
@@ -1592,7 +1592,7 @@ As soon as another node is upgraded, the replicas should be assigned and the clu
 
 Shards that have not been [sync-flushed](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-synced-flush.html) may take some time to recover.  The recovery status of individual shards can be monitored with the *_cat/recovery* request:
 
-Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/recovery?pretty" | select content | Format-List
+		Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/recovery?pretty" | select content | Format-List
 
 8. **Repeat:**
 
