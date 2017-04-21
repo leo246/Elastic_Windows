@@ -348,7 +348,7 @@ The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one
 	$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}\`n{'name':'Jane Doe'}`n".Replace("'","`"")
 	Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
-**(note: due to formatting, the lines above are wrapped.)**
+
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_21.png)
 
@@ -357,7 +357,7 @@ The following example updates the first document (ID of 1) and then deletes the 
 	$Body = "{'update':{'_index':'customer','_type':'external','_id':'1'}}`n{'doc':{'name':'John Doe becomes Jane Doe'}}`n{'delete':{'_index':'customer','_type':'external','_id':'2'}}`n".Replace("'","`"")
 	Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
-**(note: due to formatting, the lines above are wrapped.)**
+
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_22.png)
 
@@ -451,7 +451,6 @@ There are two basic ways to run searches:  one is by sending search parameters t
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_25.png)
 
@@ -490,7 +489,6 @@ As above, the query part indicates what our query definition is, and the match_a
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_26.png)
 
@@ -505,7 +503,6 @@ This will only list the first 2 results.  Note, that if you do not specify a siz
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 The *from* parameter (0-based) specifies which document index to start from and the *size* parameter specifies how many documents to return starting at the *from* parameter.  This feature is useful when implementing paging of search results.  Note that if from is not specified, it defaults to 0.
 
@@ -517,7 +514,6 @@ The *from* parameter (0-based) specifies which document index to start from and 
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_27.png)
 
@@ -535,7 +531,6 @@ Let's dig some more into the Query DSL.  By default, the full JSON document is r
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 # ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_28.png)
 
@@ -552,7 +547,6 @@ We have seen how the *match_all* query is used to match all documents.  Let's no
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 3.  This example returns all the accounts containing the term "mill" in the address:
 
@@ -561,7 +555,6 @@ We have seen how the *match_all* query is used to match all documents.  Let's no
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 4.  This example returns all accounts containing the term "mill" or “lane” in the address:
 
@@ -570,7 +563,6 @@ We have seen how the *match_all* query is used to match all documents.  Let's no
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 5.   This example is a variant of *match* (*match_phrase*) that returns all accounts containing the phrase "mill lane" in the address:
 
@@ -579,7 +571,6 @@ We have seen how the *match_all* query is used to match all documents.  Let's no
 			}'
 			Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 6.  Let's introduce the [bool (ean) query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html).  The *bool* query allows us to compose smaller queries into bigger queries using boolean logic.  This example composes two *match* queries and returns all accounts containing "mill" and “lane” in the address:
 
@@ -595,7 +586,6 @@ We have seen how the *match_all* query is used to match all documents.  Let's no
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_29.png)
 
@@ -615,7 +605,6 @@ In the example above, the *bool must* clause specifies all queries that must be 
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 The *bool should* clause specifies a list of queries either of which must be true for a document to be considered a match.
 
@@ -633,7 +622,6 @@ The *bool should* clause specifies a list of queries either of which must be tru
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 The bool *must_not* clause specifies a list of queries none of which must be true for a document to be considered a match.  You can combine *must*, *should* and *must_not* clauses simultaneously inside a *bool* query.  Furthermore, we can compose *bool* queries inside any of these *bool* clauses to mimic any complex multi-level boolean logic.
 
@@ -653,7 +641,6 @@ The bool *must_not* clause specifies a list of queries none of which must be tru
 		}'
 		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-**(note: due to formatting, the lines above are wrapped.)**
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_30.png)
 
