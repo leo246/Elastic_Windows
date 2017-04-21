@@ -309,19 +309,19 @@ In addition to being able to index and replace documents, we can also update the
 
  
 
-1.       Update the previous document (ID of 1) by changing the name field to "Jane Doe":
+1.  Update the previous document (ID of 1) by changing the name field to "Jane Doe":
 
   ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_17.png)
 
  
 
-2.       This example shows how to update our previous document (ID of 1) by changing the name field to "Jane Doe" and at the same time add an age field to it:
+2.  This example shows how to update our previous document (ID of 1) by changing the name field to "Jane Doe" and at the same time add an age field to it:
 
  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_18.png)
 
  
 
-3.       Updates can also be performed by using simple scripts.  This example uses a script to increment the age by 5:
+3.  Updates can also be performed by using simple scripts.  This example uses a script to increment the age by 5:
 
  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_19.png)
 
@@ -337,7 +337,7 @@ In the above, ctx._source refers to the current source document that is about to
 
  
 
-1.       Deleting documents is fairly straightforward.  This example shows how to delete our previous customer with ID of 2:
+1.  Deleting documents is fairly straightforward.  This example shows how to delete our previous customer with ID of 2:
 
  
 
@@ -355,7 +355,7 @@ In addition to being able to index, update and delete individual documents, Elas
 
 The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one bulk operation:
 
-*$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}`n{'name':'Jane Doe'}`n".Replace("'","`"")*
+*$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}/`n{'name':'John Doe'}/`n{'index':{'_index':'customer','_type':'external','_id':'2'}}/`n{'name':'Jane Doe'}/`n".Replace("'","`"")*
 
 *Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'*
 
