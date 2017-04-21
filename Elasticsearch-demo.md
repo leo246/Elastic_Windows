@@ -151,7 +151,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 1. Check the cluster health, by using the[ _cat API](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html).  Remember that the node HTTP endpoint is at port 9200:
 
-	*Invoke-WebRequest -Method GET -URI http://localhost:9200/_cat/health?v | Select Content | Format-List*
+		Invoke-WebRequest -Method GET -URI http://localhost:9200/_cat/health?v | Select Content | Format-List
 
 2. The response would look similar to the following:
 
@@ -159,7 +159,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 3. Get a list of nodes with the following command:
 
-	*Invoke-WebRequest -Method GET -Uri http://localhost:9200/_cat/nodes?v | Select Content | Format-List*
+		Invoke-WebRequest -Method GET -Uri http://localhost:9200/_cat/nodes?v | Select Content | Format-List
 
 4. The output should look similar to the following:
 
@@ -171,7 +171,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 1. Take a look at the indices with the following command:
 
-	*Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List*
+		Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
 2.  The output should look similar to the following:
 
@@ -185,7 +185,7 @@ The above indicates that there are no indices yet in the cluster.
 
 1. Create an index named "customer" with the following command:
 
-	*Invoke-WebRequest -Method PUT -Uri http://localhost:9200/customer*
+		Invoke-WebRequest -Method PUT -Uri http://localhost:9200/customer
 
 Output as follows:
 
@@ -193,7 +193,7 @@ Output as follows:
 
 2. List the indexes again with the following command:
 
-	*Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List*
+		Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
 Output as follows:
 
@@ -209,9 +209,9 @@ As we are getting into more complex commands/scripts in Powershell, it is advise
 
 1. Index a customer document into the customer index, "external" type, with ID of “1” as follows:
 
-	*$name = @{"name" = "John Doe"}*
-	*$json = $name | ConvertTo-Json*
-	*Invoke-WebRequest -Uri "http://localhost:9200/customer/external/1" -Body $json -ContentType 'application/json' -Method Put* 
+		$name = @{"name" = "John Doe"}
+		$json = $name | ConvertTo-Json
+		Invoke-WebRequest -Uri "http://localhost:9200/customer/external/1" -Body $json -ContentType 'application/json' -Method Put 
 
 2. The output will look similar to the following:
 
@@ -221,8 +221,8 @@ The above indicates that a new customer document was successfully created inside
 
 3. Retrieve the document created in the index with the following command:
 
-	*Invoke-WebRequest -Method GET -Uri http://localhost:9200/customer/external/1?pretty | select Content | format-list*
-
+		Invoke-WebRequest -Method GET -Uri http://localhost:9200/customer/external/1?pretty | select Content | format-list
+	
 4. The output should look similar to the following:
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_10.png)
@@ -235,7 +235,7 @@ The above indicates that a new customer document was successfully created inside
 
 1. Delete the index created, with the following command:
 
-	*Invoke-WebRequest -Method DELETE -Uri http://localhost:9200/customer* 
+		Invoke-WebRequest -Method DELETE -Uri http://localhost:9200/customer
 
 2. The output should look as follows:
 
@@ -243,7 +243,7 @@ The above indicates that a new customer document was successfully created inside
 
 3. List all indexes with the following command:
 
-	*Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List*
+		Invoke-WebRequest –Method GET –Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
 4. With output as follows:
 
@@ -345,9 +345,8 @@ In addition to being able to index, update and delete individual documents, Elas
 
 The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one bulk operation:
 
-	*$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}\`n{'name':'John Doe'}\`n{'index':{'_index':'customer','_type':'external','_id':'2'}}\`n{'name':'Jane Doe'}\`n".Replace("'","`"")*
-
-	*Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'*
+	$Body = "{'index':{'_index':'customer','_type':'external','_id':'1'}}`n{'name':'John Doe'}`n{'index':{'_index':'customer','_type':'external','_id':'2'}}\`n{'name':'Jane Doe'}`n".Replace("'","`"")
+	Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -355,9 +354,8 @@ The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one
 
 The following example updates the first document (ID of 1) and then deletes the second document (ID of 2) in one bulk operation:
 
-	*$Body = "{'update':{'_index':'customer','_type':'external','_id':'1'}}\`n{'doc':{'name':'John Doe becomes Jane Doe'}}\`n{'delete':{'_index':'customer','_type':'external','_id':'2'}}\`n".Replace("'","`"")*
-
-	*Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'*
+	$Body = "{'update':{'_index':'customer','_type':'external','_id':'1'}}`n{'doc':{'name':'John Doe becomes Jane Doe'}}`n{'delete':{'_index':'customer','_type':'external','_id':'2'}}`n".Replace("'","`"")
+	Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Body -ContentType 'application/json'
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -375,7 +373,7 @@ The [Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/d
 
 We will now work with a more realistic dataset, through a sample of fictitious JSON documents of customer bank account information.  Each document has the following schema:
 
-	'{
+	{
 	    "account_number": 0,
 	    "balance": 16623,
 	    "firstname": "Bradshaw",
@@ -387,7 +385,7 @@ We will now work with a more realistic dataset, through a sample of fictitious J
 	    "email": "bradshawmckenzie@euron.com",
 	    "city": "Hobucken",
 	    "state": "CO"
-	}'
+	}
 
 Data generated from [http://www.json-generator.com/](http://www.json-generator.com/) so ignore actual values and semantics of data as these are all randomly generated.
 
@@ -395,12 +393,12 @@ Data generated from [http://www.json-generator.com/](http://www.json-generator.c
 
 1.  Download the sample dataset (accounts.json)[ here](https://github.com/elastic/elasticsearch/blob/master/docs/src/test/resources/accounts.json?raw=true).  Extract the file to your current directory and load the file into the cluster with the following command:
 
-	*Invoke-WebRequest -Method POST -Uri http://localhost:9200/bank/account/_bulk?pretty&refresh" -InFile accounts.json*
+		Invoke-WebRequest -Method POST -Uri http://localhost:9200/bank/account/_bulk?pretty&refresh" -InFile accounts.json
 
 
 2.  List and review the imported indices with the following command:
 
-	*Invoke-WebRequest –Method GET -Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List*
+		Invoke-WebRequest –Method GET -Uri http://localhost:9200/_cat/indices?v | Select Content | Format-List
 
 
 3.  The output will look similar to the following:
@@ -417,7 +415,7 @@ There are two basic ways to run searches:  one is by sending search parameters t
 
 1.  The REST API for search is accessible from the _search endpoint.  This command returns all documents in the bank index:
 
-	*Invoke-WebRequest -Method GET -Uri "http://localhost:9200/bank/_search?q=*&sort=account_number:asc&pretty" | Select Content | Format-list*
+		Invoke-WebRequest -Method GET -Uri "http://localhost:9200/bank/_search?q=*&sort=account_number:asc&pretty" | Select Content | Format-list
 
  
 2.  With the above command, we search (_search endpoint) in the bank index, and the *q=** parameter instructs Elasticsearch to match all documents in the index.  The *sort=account_number:asc *parameter indicates to sort the results using the *account_number *field of each document in ascending order.  The *pretty *parameter tells Elasticsearch to return pretty-printed JSON results:
@@ -447,11 +445,11 @@ There are two basic ways to run searches:  one is by sending search parameters t
  
 4.  Here is the same exact search using the alternative request body method:
 
-	$body = '{
-		"query": { "match_all": {} },
-		"sort": [ { "account_number": "asc" } ]
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		$body = '{
+			"query": { "match_all": {} },
+			"sort": [ { "account_number": "asc" } ]
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -477,21 +475,20 @@ Helpful Powershell DSL links:
 
 1.  In the previous section, we executed the following query:
 
-	$body = '{
-		"query": { "match_all": {} },
-		"sort": [ { "account_number": "asc" } ]
-	}'
+		$body = '{
+			"query": { "match_all": {} },
+			"sort": [ { "account_number": "asc" } ]
+		}'
 
 As above, the query part indicates what our query definition is, and the match_all part is simply the type of query that we want to run.  The match_all is a query for all documents in the specified index.
 
 2.  We can also create an array for the Body in the above command, where we specify various parameters.  In the example below we pass the size parameter:
 
-	$body = '{
-		"query": { "match_all": {} },
-		"size": 1
-	}'
-
-*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		$body = '{
+			"query": { "match_all": {} },
+			"size": 1
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -501,12 +498,12 @@ This will only list the first 2 results.  Note, that if you do not specify a siz
 
 3.  In the following example we return documents 11 through to 20:
 
-	$body = '{
-		"query": { "match_all": {} },
-		"from": 10,
-		"size": 10
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		$body = '{
+			"query": { "match_all": {} },
+			"from": 10,
+			"size": 10
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -514,11 +511,11 @@ The *from* parameter (0-based) specifies which document index to start from and 
 
 4.  This example does a match and sorts the results by account balance in descending order and returns the top 10 (default size) documents:
 
-	$body = '{
-		"query": { "match_all": {} },
-		"sort": { "balance": { "order": "desc" } }
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		$body = '{
+			"query": { "match_all": {} },
+			"sort": { "balance": { "order": "desc" } }
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -532,11 +529,11 @@ Let's dig some more into the Query DSL.  By default, the full JSON document is r
 
 1. Below shows how to return two fields, *account_number* and *balance* (inside *_source*), from the search:
 
-	$body = '{
-		"query": { "match_all": {} },
-		"_source": ["account_number", "balance"]
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		$body = '{
+			"query": { "match_all": {} },
+			"_source": ["account_number", "balance"]
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -550,53 +547,53 @@ We have seen how the *match_all* query is used to match all documents.  Let's no
 
 2.  This example returns the account numbered 20:
 
-	$body = '{
-		"query": { "match": { "account_number": 20 } }
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		$body = '{
+			"query": { "match": { "account_number": 20 } }
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
 3.  This example returns all the accounts containing the term "mill" in the address:
 
-	$body = '{
-		"query": { "match": { "address": "mill" } }
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		$body = '{
+			"query": { "match": { "address": "mill" } }
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
 4.  This example returns all accounts containing the term "mill" or “lane” in the address:
 
-	$body = '{
-		"query": { "match": { "address": "mill lane" } }
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		$body = '{
+			"query": { "match": { "address": "mill lane" } }
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
 5.   This example is a variant of *match* (*match_phrase*) that returns all accounts containing the phrase "mill lane" in the address:
 
-	$body = '{
-		"query": { "match_phrase": { "address": "mill lane" } }
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+			$body = '{
+				"query": { "match_phrase": { "address": "mill lane" } }
+			}'
+			Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
 6.  Let's introduce the [bool (ean) query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html).  The *bool* query allows us to compose smaller queries into bigger queries using boolean logic.  This example composes two *match* queries and returns all accounts containing "mill" and “lane” in the address:
 
-	$body = '{
-		"query": {
-			"bool": {
-				"must": [
-					{ "match": { "address": "mill" } },
-					{ "match": { "address": "lane" } }
-				]
+		$body = '{
+			"query": {
+				"bool": {
+					"must": [
+						{ "match": { "address": "mill" } },
+						{ "match": { "address": "lane" } }
+					]
+				}
 			}
-		}
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -606,17 +603,17 @@ In the example above, the *bool must* clause specifies all queries that must be 
 
 7.  In contrast, this example composes two *match *queries and returns all accounts containing "mill" or “lane” in the address:
 
-	$body = '{
-		"query": {
-			"bool": {
-				"should": [
-					{ "match": { "address": "mill" } },
-					{ "match": { "address": "lane" } }
-				]
+		$body = '{
+			"query": {
+				"bool": {
+					"should": [
+						{ "match": { "address": "mill" } },
+						{ "match": { "address": "lane" } }
+					]
+				}
 			}
-		}
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -624,37 +621,37 @@ The *bool should* clause specifies a list of queries either of which must be tru
 
 8.  This example composes two match queries and returns all the accounts that contain neither "mill" nor “lane” in the address:
 
-	$body = '{
-		"query": {
-			"bool": {
-				"must_not": [
-					{ "match": { "address": "mill" } },
-					{ "match": { "address": "lane" } }
-				]
+		$body = '{
+			"query": {
+				"bool": {
+					"must_not": [
+						{ "match": { "address": "mill" } },
+						{ "match": { "address": "lane" } }
+					]
+				}
 			}
-		}
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-The bool *must_not *clause specifies a list of queries none of which must be true for a document to be considered a match.  You can combine *must*, *should *and *must_not *clauses simultaneously inside a *bool *query.  Furthermore, we can compose *bool *queries inside any of these *bool *clauses to mimic any complex multi-level boolean logic.
+The bool *must_not* clause specifies a list of queries none of which must be true for a document to be considered a match.  You can combine *must*, *should* and *must_not* clauses simultaneously inside a *bool* query.  Furthermore, we can compose *bool* queries inside any of these *bool* clauses to mimic any complex multi-level boolean logic.
 
 9.  This example returns all accounts of anybody who is 40 years old, but doesn't live in ID(aho):
 
-	$body = '{
-		"query": {
-			"bool": {
-				"must": [
-					{ "match": { "age": "40" } }
-				],
-				"must_not": [
-					{ "match": { "state": "ID" } }
-				]
+		$body = '{
+			"query": {
+				"bool": {
+					"must": [
+						{ "match": { "age": "40" } }
+					],
+					"must_not": [
+						{ "match": { "state": "ID" } }
+					]
+				}
 			}
-		}
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 **(note: due to formatting, the lines above are wrapped.)**
 
@@ -673,8 +670,7 @@ The [bool query](https://www.elastic.co/guide/en/elasticsearch/reference/current
 This example uses a bool query to return all accounts with balances between 20000 and 30000, inclusive.  We want to find accounts with a balance that is greater than or equal to 20000 and less than 30000.
 
 	$body = '{ "query": { "bool": { "must": { "match_all": {} }, "filter": { "range": { "balance": { "gte": 20000, "lte": 30000 } }}}}}'
-
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+	Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 Dissecting the above, the bool query contains a match_all query (the query part) and a range query (the filter part).  We can substitute any other queries into the query and the filter parts.  In the case above, the range query makes perfect sense since documents falling into the range all match "equally", i.e. no document is more relevant than the other.
 
@@ -688,17 +684,17 @@ Aggregations provide the ability to group and extract statistics from data.  In 
 
 1. This example groups all accounts by state, and then returns the top 10 (default) states sorted by count descending (also default):
 
-	$body = '{
-		"size": 0,
-			"aggs": {
-				"group_by_state": {
-					"terms": {
-					"field": "state.keyword"
+		$body = '{
+			"size": 0,
+				"aggs": {
+					"group_by_state": {
+						"terms": {
+						"field": "state.keyword"
+					}
 				}
 			}
-		}
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_31.png)
 
@@ -712,92 +708,92 @@ Note that we set size=0 to not show search hits because we only want to see the 
 
 2. Building on the previous aggregation, this example calculates the average account balance by state (again only the top 10 states sorted by count in descending order):
 
-	$body = '{
-	  "size": 0,
-	  "aggs": {
-	    "group_by_state": {
-	      "terms": {
-		"field": "state.keyword"
-	      },
-	      "aggs": {
-		"average_balance": {
-		  "avg": {
-		    "field": "balance"
+		$body = '{
+		  "size": 0,
+		  "aggs": {
+		    "group_by_state": {
+		      "terms": {
+			"field": "state.keyword"
+		      },
+		      "aggs": {
+			"average_balance": {
+			  "avg": {
+			    "field": "balance"
+			  }
+			}
+		      }
+		    }
 		  }
-		}
-	      }
-	    }
-	  }
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 Notice how we nested the average_balance aggregation inside the group_by_state aggregation.  This is a common pattern for all aggregations.  You can nest aggregation inside aggregations arbitrarily to extract pivoted summarizations that you require from your data.
 
 3. Building on the previous aggregation, let's sort on the average balance in descending order:
 
-	$body = '{
-	  "size": 0,
-	  "aggs": {
-	    "group_by_state": {
-	      "terms": {
-		"field": "state.keyword",
-		"order": {
-		  "average_balance": "desc"
-		}
-	      },
-	      "aggs": {
-		"average_balance": {
-		  "avg": {
-		    "field": "balance"
-		  }
-		}
-	      }
-	    }
-	  }
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
-
-4. This example shows how we can group by age and brackets (ages 20-29, 30-39 and 40-49), then by gender, and finally get the average account balance, per age bracket, per gender:
-
-	$body = '{
-	  "size": 0,
-	  "aggs": {
-	    "group_by_age": {
-	      "range": {
-		"field": "age",
-		"ranges": [
-		  {
-		    "from": 20,
-		    "to": 30
-		  },
-		  {
-		    "from": 30,
-		    "to": 40
-		  },
-		  {
-		    "from": 40,
-		    "to": 50
-		  }
-		]
-	      },
-	      "aggs": {
-		"group_by_gender": {
-		  "terms": {
-		    "field": "gender.keyword"
-		  },
+		$body = '{
+		  "size": 0,
 		  "aggs": {
-		    "average_balance": {
-		      "avg": {
-			"field": "balance"
+		    "group_by_state": {
+		      "terms": {
+			"field": "state.keyword",
+			"order": {
+			  "average_balance": "desc"
+			}
+		      },
+		      "aggs": {
+			"average_balance": {
+			  "avg": {
+			    "field": "balance"
+			  }
+			}
 		      }
 		    }
 		  }
-		}
-	      }
-	    }
-	  }
-	}'
-	*Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list*
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
+
+4. This example shows how we can group by age and brackets (ages 20-29, 30-39 and 40-49), then by gender, and finally get the average account balance, per age bracket, per gender:
+
+		$body = '{
+		  "size": 0,
+		  "aggs": {
+		    "group_by_age": {
+		      "range": {
+			"field": "age",
+			"ranges": [
+			  {
+			    "from": 20,
+			    "to": 30
+			  },
+			  {
+			    "from": 30,
+			    "to": 40
+			  },
+			  {
+			    "from": 40,
+			    "to": 50
+			  }
+			]
+		      },
+		      "aggs": {
+			"group_by_gender": {
+			  "terms": {
+			    "field": "gender.keyword"
+			  },
+			  "aggs": {
+			    "average_balance": {
+			      "avg": {
+				"field": "balance"
+			      }
+			    }
+			  }
+			}
+		      }
+		    }
+		  }
+		}'
+		Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
 The [aggregations reference guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html) is a great starting point if you want to do further experimentation.
 
@@ -893,7 +889,7 @@ Any settings that can be specified in the config file can also be specified on t
 
 You can test that your Elasticsearch node is running by sending an HTTP request, in a powershell console, to port *9200* on the *localhost*:
 
-Invoke-WebRequest -Method Get -Uri [http://localhost:9200](http://localhost:9200)
+	Invoke-WebRequest -Method Get -Uri [http://localhost:9200](http://localhost:9200)
 
 If Elasticsearch is not running:
 
@@ -907,7 +903,7 @@ If Elasticsearch is running:
 
 Elasticsearch can be installed as a service to run in the background, or start automatically at boot time, without any user interaction.  This can be achieved through the *elasticsearch-service.bat* script in the *%ES_HOME%\bin* folder which allows one to install, remove, manage or configure the service and potentially start and stop the service, all from the command-line:
 
-PS C:\es\elasticsearch-5.3.0\bin> .\elasticsearch-service.bat
+	PS C:\es\elasticsearch-5.3.0\bin> .\elasticsearch-service.bat
 
 Usage: elasticsearch-service.bat install|remove|start|stop|manager [SERVICE_ID]
 
@@ -925,13 +921,11 @@ The script requires one parameter (the command to execute) followed by an option
 
 Based on the architecture of the available JDK/JRE (set through JAVA_HOME), the appropriate 64-bit or 32-bit service will be installed.  This information is made available during installation:
 
-PS C:\es\elasticsearch-5.3.0\bin> .\elasticsearch-service.bat install
+	PS C:\es\elasticsearch-5.3.0\bin> .\elasticsearch-service.bat install
 
-Installing service      :  "elasticsearch-service-x64"
+	Installing service      :  "elasticsearch-service-x64"
 
-Using JAVA_HOME (64-bit):  "C:\Program Files\Java\jdk1.8.0_112"
-
-Failed installing 'elasticsearch-service-x64' service
+	Using JAVA_HOME (64-bit):  "C:\Program Files\Java\jdk1.8.0_112"
 
 **Note**:  While a JRE can be used for the Elasticsearch service, due to its use of a client VM (as opposed to a server JVM which offers better performance for long-running applications) its usage is discouraged and a warning will be displayed.
 
@@ -942,51 +936,39 @@ Failed installing 'elasticsearch-service-x64' service
 The elasticsearch service can be configured prior to installation by setting the following environment variables (either using [Powershell cmdlets](https://technet.microsoft.com/en-us/library/ff730964.aspx), or through the *System Properties* -> *Environment Variables* GUI).
 
 *SERVICE_ID*:  
-
 A unique identifier for the service. Defaults to *elasticsearch-service-x86* (32bit Windows) or *elasticsearch-x64* (on 64-bit Windows).
 
 *SERVICE_USERNAME*:  
-
 The user to run as, defaults to local system account.
 
 *SERVICE_PASSWORD*:
-
 The password for the user specified in *%SERVICE_USERNAME%*.
 
 *SERVICE_DISPLAY_NAME*:
-
 The name of the service.  Defaults to *Elasticsearch <version> %SERVICE_ID%*.
 
 *SERVICE_DESCRIPTION*:
-
 The description of the service.  Defaults to *Elasticsearch <version> Windows Service - **[https://elastic.c*o](https://elastic.co).
 
 *JAVA_HOME*:
-
 The installation directory of the desired JVM to run the service under.
 
 *LOG_DIR*:
-
 Log directory, defaults to *%ES_HOME%\logs*.
 
 *DATA_DIR*:
-
 Data directory, defaults to *%ES_HOME%\data*.
 
 *CONF_DIR*:
-
 Configuration file directory (which includes *elasticsearch.yml* and* log4j2.properties* files), defaults to *%ES_HOME%\conf*.
 
 *ES_JAVA_OPTS*:
-
 Any additional JVM system properties you may want to apply.
 
 *ES_START_TYPE*:
-
 Startup mode for the service.  Can be either *auto* or *manual* (default).
 
 *ES_STOP_TIMEOUT*:
-
 The timeout in seconds that procrun waits for service to exit gracefully.  Defaults to 0.
 
 **Note**:  Elasticsearch-service.bat relies on [Apache Commons Daemon](http://commons.apache.org/proper/commons-daemon/) project to install the service.  Environment variables set prior to the service installation are copied and will be used during the service lifecycle.  This means any changes made to them after installation will not be picked up unless the service is reinstalled.
@@ -995,7 +977,7 @@ The timeout in seconds that procrun waits for service to exit gracefully.  Defau
 
 #### Using the Manager GUI:
 
-it is possible to configure the service after it has been installed using the manager GUI (**elasticsearch-service-mgr.exe**), which offers insight into the installed service, including its status, startup type, JVM, start and stop settings amongst other things.  Simply invoking **elasticsearch-service.bat manager** for the command line will open the manager window:
+It is possible to configure the service after it has been installed using the manager GUI (**elasticsearch-service-mgr.exe**), which offers insight into the installed service, including its status, startup type, JVM, start and stop settings amongst other things.  Simply invoking **elasticsearch-service.bat manager** for the command line will open the manager window:
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_34.png)
 
@@ -1043,37 +1025,30 @@ These files are located in the config directory, whose location defaults to *%ES
 
 The configuration formats is [YAML](http://www.yaml.org/).  Here is an example of changing the path of the data and logs directories:
 
-path:
-
-data:  c:\ES\data
-
-	logs:  c:\ES\logs
-
-Settings can also be flattened as follows:
-
-path.data:  c:\ES\data
-
-path.logs:  c:\ES\logs
+	path:
+	data:  c:\ES\data
+		logs:  c:\ES\logs
+	Settings can also be flattened as follows:
+	path.data:  c:\ES\data
+	path.logs:  c:\ES\logs
 
 ## Environment variable substitution:
 
 Environment variables referenced with the *${...}* notation within the configuration file will be replaced with the value of the environment variable, for instance:
 
-node.name:		${HOSTNAME}
-
-network.host:	${ES_NETWORK_HOST}
+	node.name:		${HOSTNAME}
+	network.host:	${ES_NETWORK_HOST}
 
 ## Prompting for settings:
 
 For settings that you do not store in the configuration file, you can use the value *${prompt.text}* or *${prompt.secret} *and start Elasticsearch in the foreground.  *${prompt.secret}* has echoing disabled so that the value entered will not appear in your console; *${prompt.text}* will allow you to see the value as you type it in, e.g.
 
-node: 
-
-	name: ${prompt.text}
+	node: 
+		name: ${prompt.text}
 
 When starting Elasticsearch, you will be prompted to enter the actual value as follows:
 
-Enter value for [node.name]:
+	Enter value for [node.name]:
 
 **Note**:  Elasticsearch will not start if *${prompt.text}* or *${prompt.secret}* is not used in the settings and the process is run as a service or in the background.
 
@@ -1081,7 +1056,7 @@ Enter value for [node.name]:
 
 New default settings may be specified on the command line using the *default.* prefix.  This will specify the value that will be used by default unless another value is specified in the config file.  For instance, if Elasticsearch is started as follows:
 
-.\bin\elasticsearch -Edefault.node.name=My_Node
+	.\bin\elasticsearch -Edefault.node.name=My_Node
 
 The value *node.name* will be *My_Node*, unless it is overwritten on the command line with *es.node.name* or the config file with *node.name*.
 
@@ -1103,15 +1078,10 @@ appender.rolling.policies.time.interval = 1 ![image alt text](/public/6lSb1O50J2
 appender.rolling.policies.time.modulate = true ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_41.png)
 
 1. Configure the *RollingFile* appender.
-
 2. Log to *c:\ES\log\production.log*.
-
 3. Roll logs to *c:\ES\logs\production-yyyy-MM-dd.log*.
-
 4. Using a time based roll policy.
-
 5. Roll logs on a daily basis.
-
 6. Align rolls on the day boundary (as opposed to rolling every 24 hours).
 
 If you append *.gz* or *.zip* to *appender.rolling.filepattern*, then the logs will be compressed as they are rolled.  If you want to retain log files for a specific period of time, use the rollover strategy with a delete action.
@@ -1125,17 +1095,11 @@ appender.rolling.strategy.action.PathConditions.type = IfFileName ![image alt te
 appender.rolling.strategy.action.PathConditions.glob = ${sys:es.logs.cluster_name}-* ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_48.png)
 
 1. Configure the DefaultRolloverStrategy.
-
 2. Configure the Delete action for handling rollovers.
-
 3. The base path to the Elasticsearch logs.
-
 4. The condition to apply when handling rollovers.
-
 5. Retain logs for 7 days.
-
 6. Only delete files older than 7 days if they match the specific glob.
-
 7. Delete files from the base path matching the glob *${sys:es.logs.cluster_name}-**; This is the glob that log files are rolled to; This is needed to only delete the rolled Elasticsearch logs but not alos delete the deprecated and slow logs
 
 Multiple configuration files can be loaded (in which case they will get merged) as long as they are named log4j2.properties and have the Elasticsearch config directory as an ancestor; This is useful for plugins that expose additional loggers.  The logger section contains the JAVA packages and their corresponding log level.  The appender section contains the destinations for the logs.  Refer to [Log4j documentation](http://logging.apache.org/log4j/2.x/manual/configuration.html) for extensive information on how to customise logging, including all supported appenders.
@@ -1158,47 +1122,45 @@ While Elasticsearch require very little configuration, there are a number of set
 
 If you are using the *.zip* or *.tar.gz* archives, the data and logs directories are subfolders of *%ES_HOME%*.  If these important folders are left in their default locations, there is a high risk of them being deleted while upgrading Elasticsearch to a new version.  In production use, change the locations of the data and log folder:
 
-path:
-
-	logs:  c:\ES\log\elasticsearch
-
-	data:  c:\ES\data\elasticsearch
+	path:
+		logs:  c:\ES\log\elasticsearch
+		data:  c:\ES\data\elasticsearch
 
 ## cluster.name:
 
 A node can only join a cluster when it shares its *cluster.name* with all the other nodes in the cluster.  The default name is *elasticsearch*, but should be changed to a more appropriate name that describes the purpose of the cluster:
 
-cluster.name:  logging-prod
+	cluster.name:  logging-prod
 
 Make sure that you don't reuse the same names in different environments, otherwise you might end up with nodes joining the wrong cluster.
 
-## node.name:
+	## node.name:
 
 By default, Elasticsearch will take the first 7 characters of the randomly generated uuid used as the node id.  Note that the node id is persisted and does not change when a node restarts and therefore the default node name will also not change.  It's worth configuring a more meaningful name which will also have the advantage of persisting after restarting the node:
 
-node.name:  prod-data-2
+	node.name:  prod-data-2
 
 The node.name can also be set to the server's HOSTNAME as follows:
 
-node.name:  ${COMPUTERNAME}
+	node.name:  ${COMPUTERNAME}
 
-**Note: ** The **COMPUTERNAME** variable should exist as an environment variable by default.  However, if you wish to use '*HOSTNAME*' as the variable, you will need to manually create it, by navigating to Control Panel -> System Properties -> Advanced, Environment Variables.
+**Note:** The **COMPUTERNAME** variable should exist as an environment variable by default.  However, if you wish to use '*HOSTNAME*' as the variable, you will need to manually create it, by navigating to Control Panel -> System Properties -> Advanced, Environment Variables.
 
-## bootstrap.memory_lock:
+	## bootstrap.memory_lock:
 
 It is vitally important to the health of your node that none of the JVMs is ever swapped out to disk space.  One way of achieving that is to set the *bootstrap.memory_lock* setting to *true*.  For this setting to have effect, other system settings needs to be configured first.  Refer to [Enable bootstrap.memory_lock](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration-memory.html#mlockall) for more details about how to set up the memory locking correctly.
 
-## network.host:
+	## network.host:
 
 By default, Elasticsearch binds to the loopback address - e.g *127.0.0.1* and *[::1]*.  This is sufficient to run a single development node on a server.  In order to communicate and to form a cluster with nodes on other servers, the node will need to bind to a non-loopback address.  While there are a number of network settings, usually all you need to configure is the network.host:
 
-network.host:  192.168.0.10
+	network.host:  192.168.0.10
 
 The network.host setting also understands some special values as* _local_*,* _site_*,* _global_* and modifiers like *:ip4 *and *:ip6*, details which can be found in the section called ["Special values for network.host"](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html#network-interface-values).
 
 **Important**:  As soon as you provide a custom setting for *network.host*, Elasticsearch assumes that you are moving from development mode into production mode, and upgrades a number of system startup checks from warnings to exceptions.  See the section called ["Development mode vs production mode"](https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html#dev-vs-prod).
 
-## discovery.zen.ping.unicast.hosts:
+	## discovery.zen.ping.unicast.hosts:
 
 Out of the box, without any network configurations, Elasticsearch will bind to the available loopback addresses and will scan ports 9300 to 9305 to try and connect to order nodes running on the same server.  This provides an auto-clustering experience without having to do any configuration.  When the need arise to form a cluster with nodes on other servers, you have to provide a seed list of other nodes in the cluster that are likely to be live and contactable.  This can be specified as follows:
 
@@ -1208,7 +1170,6 @@ discovery.zen.ping.unicast.hosts:
    - seeds.mydomain.com ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_50.png)
 
 1. The port will default to *transport.profiles.default.port* and fallback to *transport.tcp.port* if not supported.
-
 2. A hostname that resolves to multiple IP addresses will try all resolved addresses.
 
 ## discovery.zen.minimum_master_nodes:
@@ -1221,7 +1182,7 @@ To avoid a split brain, this setting should be set to a quorum of master-eligibl
 
 In other words, if there are three master-eligible nodes, then minimum master nodes should be set to *(3 / 2) + 1 = 2:*
 
-discovery.zen.minimum_master_nodes:  2
+	discovery.zen.minimum_master_nodes:  2
 
 # Secure settings:
 
@@ -1243,23 +1204,23 @@ The file *elasticsearch.keystore* will be created alongside *elasticsearch.yml*.
 
 A list of the settings in the keystore is available with the *list* command:
 
-%ES_HOME%\bin\elasticsearch-keystore list
+	%ES_HOME%\bin\elasticsearch-keystore list
 
 ## Adding string settings:
 
 Sensitive string settings, like authentication credentials for cloud plugins, could be added using the *add* command:
 
-%ES_HOME%\bin\elasticsearch-keystore add the.setting.name.to.set
+	%ES_HOME%\bin\elasticsearch-keystore add the.setting.name.to.set
 
 The tool will prompt for the value of the setting.  To pass the value through stdin, use the *--stdin* flag:
 
-get-content c:\file\containing\setting\value | %ES_HOME%\bin\elasticsearch-keystore add --stdin the.setting.name.to.set
+	Get-Content c:\file\containing\setting\value | %ES_HOME%\bin\elasticsearch-keystore add --stdin the.setting.name.to.set
 
 ## Removing settings:
 
 To remove a setting from the keystore, use the remove command:
 
-%ES_HOME%\bin\elasticsearch-keystore remove the.setting.name.to.remove
+	%ES_HOME%\bin\elasticsearch-keystore remove the.setting.name.to.remove
 
 # Bootstrap checks:
 
@@ -1350,13 +1311,9 @@ Ideally, Elasticsearch should run alone on a server and use all of the resources
 The following settings **must** be addressed before going to production:
 
 * [Set JVM heap size](https://www.elastic.co/guide/en/elasticsearch/reference/current/heap-size.html)
-
 * [Disable swapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration-memory.html)
-
 * [Increase file descriptors](https://www.elastic.co/guide/en/elasticsearch/reference/current/file-descriptors.html)
-
 * [Ensure sufficient virtual memory](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html)
-
 * [Ensure sufficient threads](https://www.elastic.co/guide/en/elasticsearch/reference/current/max-number-of-threads.html)
 
 ### Development mode vs Production Mode:
@@ -1410,30 +1367,27 @@ By default, Elasticsearch tells the JVM to use a heap with a minimum and maximum
 The value for these settings depends on the amount of RAM available on the server.  Good rules of thumb are:
 
 * Set the minimum heap size (Xms) and maximum heap size (Xmx) to be equal to each other.
-
 * The more heap available to Elasticsearch, the more memory it can use for caching.  Note that too much heap can cause long garbage collection pauses.
-
 * Set Xmx to no more than 50% of physical RAM, to ensure that there is enough physical RAM left for the general file system.
-
 * Don't set Xmx to above the cutoff that the JVM uses for compressed object pointers (compressed oops).  The exact cutoff varies but is near to 32GB.  You can verify that you are under the limit by looking for a line in the logs like the following:
 
 	heap size [1.9gb],  compressed ordinary object pointers  [true]
 
 * Even better, try to stay below the threshold for zero-based compressed oops.  The exact cutoff varies, but 26GB is safe on most systems, but can be as large as 30GB on some systems.  You can verify that you are under the limit by starting Elasticsearch with the JVM options - *XX: +UnlockDiagnosticVMOptions  -XX: +PrintCompressedOopsMode* and looking for a line like the following:
 
-heap address: 0x000000011be00000, size:  27648 MB, zero base Compressed Oops
+	heap address: 0x000000011be00000, size:  27648 MB, zero base Compressed Oops
 
-	Showing that zero-based compressed oops are enabled instead of:
+Showing that zero-based compressed oops are enabled instead of:
 
-heap address:  0x0000000118400000, size:  28672 MB, Compressed Oops with base:  0x00000001183ff000
+	heap address:  0x0000000118400000, size:  28672 MB, Compressed Oops with base:  0x00000001183ff000
 
 Here are examples of how to set the heap size via the jvm.options file:
 
--Xms2g
+	-Xms2g
 
 Set the minimum heap size to 2GB.
 
--Xmx2g
+	-Xmx2g
 
 Set the maximum heap size to 2GB.
 
@@ -1451,11 +1405,11 @@ Most Operating systems try to use as much memory as possible for file system cac
 
 The first option is to use [VirtualLock](https://msdn.microsoft.com/en-us/library/windows/desktop/aa366895%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396) on Windows, to try and lock the process address space into RAM, preventing any Elasticsearch memory from being swapped out.  This can be done by adding this line to the %ES_HOME%\config\elasticsearch.yml file:
 
-bootstrap.memory_lock:  true
+	bootstrap.memory_lock:  true
 
 After starting Elasticsearch, verify the setting applied, by checking the *mlockall* value in the output of the following  command:
 
-Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_nodes?pretty&filter_path=**.mlockall" | select Content | Format-List
+	Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_nodes?pretty&filter_path=**.mlockall" | select Content | Format-List
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_51.png)
 
@@ -1516,13 +1470,9 @@ Thus, no changes to be made on a Windows 64bit system.  Refer to the following l
 **Important:**  Before upgrading Elasticsearch:
 
 * Consult the [breaking changes](https://www.elastic.co/guide/en/elasticsearch/reference/current/breaking-changes.html) documentation.
-
 * Use the [Elasticsearch Migration Plugin](https://github.com/elastic/elasticsearch-migration/) to detect potential issues before upgrading.
-
 * Test upgrades in dev environment before upgrading your production cluster.
-
 * Always [back up your data](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html) before upgrading.  You **can not roll back** to an earlier version unless you have a backup of your data.
-
 * If you are using custom plugins, check that a compatible version is available.
 
 Elasticsearch can usually be upgraded using a rolling process, resulting in no interruption of service.  This section details how to perform both rolling upgrading and upgrades with full cluster restarts.
@@ -1563,7 +1513,7 @@ To determine whether a rolling upgrade is supported for your release, consult th
 </table>
 
 
-**Important: ** Indices created in Elasticsearch 1.x or before:
+**Important:** Indices created in Elasticsearch 1.x or before:
 
 Elasticsearch is able to read indices created in the previous major version only.  For instance, Elasticsearch 5.x can use indices created in Elasticsearch 2.x, but not those created in Elasticsearch 1.x, or before.
 
@@ -1583,17 +1533,12 @@ To perform a rolling upgrade:
 
 When you shut down a node, the allocation process  will wait for one minute before starting to replicate the shards that were on that node to other nodes in the cluster, causing a lot of wasted I/O.  This can be avoided by disabling allocation before shutting down a node:
 
-$body = '{
-
-  "transient": {
-
-    "cluster.routing.allocation.enable": "none"
-
-  }
-
-}'
-
-Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
+		$body = '{
+		  "transient": {
+		    "cluster.routing.allocation.enable": "none"
+		  }
+		}'
+		Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_55.png)
 
@@ -1601,7 +1546,7 @@ Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -Co
 
 You may happily continue indexing during the upgrade.  However, shard recovery will be much faster if you temporarily stop non-essential indexing and issue a [synced-flush](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-synced-flush.html) request:
 
-Invoke-WebRequest -Method POST -Uri "http://localhost:9200/_flush/synced?pretty" | select content | format-list
+		Invoke-WebRequest -Method POST -Uri "http://localhost:9200/_flush/synced?pretty" | select content | format-list
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_56.png)
 
@@ -1616,9 +1561,7 @@ Shut down one of the nodes in the cluster **before** starting the upgrade.
 To upgrade using the zip file:
 
 * Extract the zip file to a new directory, to be sure you don't overwrite the *conf* or *data* directories.
-
 * Either copy the files in the *conf* directory from the old installation to the new installation, or set the environment variable *ES_JVM_OPTIONS* to the location of the *jvm.options* file, and use the *-E path.conf=* option on the command line to point to an external conf directory.
-
 * Either copy the files in the *data* directory from the old installation to the new installation, or configure the location of the data directory in the *conf/elasticsearch.yml* file, with the path.data setting.
 
 4. **Upgrade any plugins:**
@@ -1629,23 +1572,18 @@ Elasticsearch plugins must be upgraded when upgrading a node.  Use the elasticse
 
 Start the upgraded node and confirm that it joins the cluster by checking the log file or by checking the output of the following request:
 
-Invoke-WebRequest -Method Get -Uri "http://localhost:9200/_cat/nodes" | select content | format-list
+		Invoke-WebRequest -Method Get -Uri "http://localhost:9200/_cat/nodes" | select content | format-list
 
 6. **Re-enable shard allocation:**
 
 Once the node has joined the cluster, re-enable shard allocation to start using the node, with the following:
 
-$body = '{
-
-  "transient": {
-
-    "cluster.routing.allocation.enable": "all"
-
-  }
-
-}'
-
-Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
+		$body = '{
+		  "transient": {
+		    "cluster.routing.allocation.enable": "all"
+		  }
+		}'
+		Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_57.png)
 
@@ -1653,7 +1591,7 @@ Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -Co
 
 You should wait for the cluster to finish shard allocation before upgrading the next node.  You can check on the progress with the *_cat/health* request:
 
-Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/health?pretty" | select content | Format-List
+		Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/health?pretty" | select content | Format-List
 
 Wait for the status column to change from *yellow* to *green*.  Status *green* means that all primary and replica shards have been allocated.
 
@@ -1683,17 +1621,12 @@ Elasticsearch requires a full cluster restart when upgrading across major versio
 
 When you shut down a node, the allocation process  will wait for one minute before starting to replicate the shards that were on that node to other nodes in the cluster, causing a lot of wasted I/O.  This can be avoided by disabling allocation before shutting down a node:
 
-$body = '{
-
-  "transient": {
-
-    "cluster.routing.allocation.enable": "none"
-
-  }
-
-}'
-
-Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
+		$body = '{
+		  "transient": {
+		    "cluster.routing.allocation.enable": "none"
+		  }
+		}'
+		Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_58.png)
 
@@ -1701,7 +1634,7 @@ Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -Co
 
 Shard recovery will be much faster if you temporarily stop non-essential indexing and issue a [synced-flush](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-synced-flush.html) request:
 
-Invoke-WebRequest -Method POST -Uri "http://localhost:9200/_flush/synced?pretty" | select content | format-list
+		Invoke-WebRequest -Method POST -Uri "http://localhost:9200/_flush/synced?pretty" | select content | format-list
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_59.png)
 
@@ -1721,9 +1654,9 @@ If you have dedicated master nodes - nodes with *node.master* set to *true* (the
 
 As soon as the [minimum number of master-eligible nodes](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-zen.html#master-election) have discovered each other, they will form a cluster and elect a master.  From that point on, the *_cat/health* and *_cat/nodes* APIs can be used to monitor nodes joining the cluster:
 
-Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/health?pretty" | select Content | Format-List
+		Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/health?pretty" | select Content | Format-List
 
-Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/nodes?pretty" | select Content | Format-List
+		Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/nodes?pretty" | select Content | Format-List
 
 Use these APIs to check that all nodes have successfully joined the cluster.
 
@@ -1737,25 +1670,20 @@ Once each node has recovered its local shards, the *status* will become *yellow*
 
 Delaying the allocation of replicas until all nodes have joined the cluster allows the master to allocate replicas to nodes which already have local shard copies.  At this point, with all the nodes in the cluster, it is safe to re-enable shard allocation:
 
-$body = '{
-
-  "persistent": {
-
-    "cluster.routing.allocation.enable": "all"
-
-  }
-
-}'
-
-Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
+		$body = '{
+		  "persistent": {
+		    "cluster.routing.allocation.enable": "all"
+		  }
+		}'
+		Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
 
 The cluster will now start allocating replicas to all data nodes.  At this point it is safe to resume indexing and searching, but the cluster will recover more quickly if you can delay indexing and searching until all shards have recovered.
 
 You can monitor the progress with the* _cat/health* and *_cat/recovery* APIs:
 
-Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/health?pretty" | select Content | Format-List
+		Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/health?pretty" | select Content | Format-List
 
-Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/recovery?pretty" | select Content | Format-List
+		Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_cat/recovery?pretty" | select Content | Format-List
 
 Once the status column in the *_cat/health* output has reached *green*, all primary and replica shards have been successfully allocated.
 
@@ -1788,17 +1716,11 @@ The easiest way to reindex old (1.x) indices in place is to use the [Elasticsear
 The reindex utility provided in the migration plugin does the following:
 
 * Creates a new index with the Elasticsearch version appended to the old index name (e.g. *my_index-2.4.1*), copying the mappings and settings from the old index.  Refresh is disabled on the new index and the number of replicas is set to *0* for efficient reindexing.
-
 * Sets the old index to read only to ensure that no data is written to the old index.
-
 * Reindexes all documents from the old index to the new index.
-
 * Resets the *refresh_interval* and *number_of_replicas* to the values used in the old index, and waits for the index status to become green.
-
 * Adds any aliases that existed on the old index to the new index.
-
 * Deletes the old index.
-
 * Adds an alias to the new index with the old index name, e.g. alias *my_index* points to index *my_index-2.4.1*.
 
 At the end of this process, you will have a new 2.x index which can be used by an Elasticsearch 5.x cluster.
@@ -1814,13 +1736,9 @@ You will need to set up a 5.x cluster alongside your existing 1.x cluster.  The 
 For each 1.x index that you want to transfer to the 5.x cluster, you will need to:
 
 * Create a new index in 5.x with the appropriate mappings and settings.  Set the *refresh_interval* to *-1* and set *number_of_replicas* to *0* for faster reindexing.
-
 * Use [reindex-from-remote](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html#reindex-from-remote) to pull documents from the 1.x index into the new 5.x index.
-
 * If you run the reindex job in the background (with *wait_for_completion* set to *false*), the reindex request will return a *task_id* which can be used to monitor progress of the reindex job in the [task API](https://www.elastic.co/guide/en/elasticsearch/reference/current/tasks.html). 
-
 * Once reindex has completed, set the *refresh_interval* and *number_of_replicas* to the desired values (defaults are *30s* and *1* respectively) .
-
 * Once the new index has finished replication, you can delete the old index.
 
 The 5.x cluster can start out small, and you can gradually move nodes from the 1.x cluster to the 5.x cluster as you migrate indices across.
@@ -1833,15 +1751,15 @@ An orderly shutdown of Elasticsearch ensures that Elasticsearch has a chance to 
 
 If you are running Elasticsearch directly, you can stop Elasticsearch by sending control-C if you are running Elasticsearch in console, or by the following Powershell command to kill the relevant process:
 
-Get-Process -ProcessName elasticsearch* | Stop-Process
+		Get-Process -ProcessName elasticsearch* | Stop-Process
 
 Or obtain the relevant Process ID from the Elasticsearch startup logs (*%ES_HOME%\logs\elasticsearch-service-x64-stdout.<date.time>.log*):
 
-[2017-04-19T14:58:06,822][INFO ][o.e.n.Node               ] version[5.3.0], pid[12540], build[3adb13b/2017-03-23T03:31:50.652Z], OS[Windows Server 2012
+		[2017-04-19T14:58:06,822][INFO ][o.e.n.Node               ] version[5.3.0], pid[12540], build[3adb13b/2017-03-23T03:31:50.652Z], OS[Windows Server 2012
 
 Then stop the relevant PID:
 
-Stop-Process -ID 12540
+		Stop-Process -ID 12540
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_60.png)
 
@@ -1888,9 +1806,7 @@ This section discusses the changes that you need to be aware of when migrating y
 As a general rule:
 
 * Migration between minor versions - e.g. 5.x to 5.y - can be performed by [upgrading one node at a time](#heading=h.v4m3eqmfbvim).
-
 * Migration between consecutive major versions - e.g. 2.x to 5.x - requires a [full cluster restart](#heading=h.2qqxzegoedzh).
-
 * Migration between non-consecutive major versions - e.g. 1.x to 5.x - is not supported.
 
 Refer to [Upgrading Elasticsearch](#heading=h.9bazp5artesx) for more information.
@@ -1906,9 +1822,7 @@ Refer to [Upgrading Elasticsearch](#heading=h.9bazp5artesx) for more information
 Previously Elasticsearch exposed a single system property (es.logs) that included the absolute path to the configured logs directory, and the prefix of the file names used for the various logging files (the main log file, the deprecation log, and the slow logs).  This property has been replaced in favor of three properties:
 
 * *es.logs.base_path*:  the absolute path to the configured logs directory
-
 * *es.logs.cluster_name*:  the default prefix of the filenames used for various logging files.
-
 * *es.logs.node_name*:  exposed if *node.name* is configured for inclusion in the file names of the various logging files (if preferred).
 
 The property *es.logs* is deprecated and be removed in Elasticsearch 6.0.0.
@@ -1958,42 +1872,25 @@ Elasticsearch has attempted to install a system call filter since 2.1.0.  These 
 In an effort to clean up internals, the following methods has been removed:
 
 * *PutRepositoryRequest#source(XContentBuilder)*
-
 * *PutRepositoryRequest#source(String)*
-
 * *PutRepositoryRequest#source(byte[])*
-
 * *PutRepositoryRequest#source(byte[], int, int)*
-
 * *PutRepositoryRequest#source(BytesReference)*
-
 * *CreateSnapshotRequest#source(XContentBuilder)*
-
 * *CreateSnapshotRequest#source(String)*
-
 * *CreateSnapshotRequest#source(byte[])*
-
 * *CreateSnapshotRequest#source(byte[], int, int)*
-
 * *CreateSnapshotRequest#source(BytesReference)*
-
 * *RestatoreSnapshotRequest#source(XContentBuilder)*
-
 * *RestatoreSnapshotRequest#source(String)*
-
 * *RestatoreSnapshotRequest#source(byte[])*
-
 * *RestatoreSnapshotRequest#source(byte[], int, int)*
-
 * *RestatoreSnapshotRequest#source(BytesReference)*
-
 * *RolloverRequest#source(BytesReference)*
-
 * *ShrinkRequest#source(BytesReference)*
-
 * *UpdateRequest#fromXContent(BytesReference)*
 
-Please use non*-source* methods instead (like *settings* and *type*).
+Please use non-source methods instead (like *settings* and *type*).
 
 #### Timestamp meta-data field type for ingest processors has changed:
 
@@ -2014,11 +1911,8 @@ The type of  the "timestamp" meta-data field for ingest processors has changed f
 Alias names are now validated against almost the same set of rules that validate index names.  The only difference is that aliases are allowed to have uppercase characters.  That means that aliases may not:
 
 * Start with *_*, *-*, or *+*
-
 * Contain *#, \, /, *, ?, ", <, >, |, `, ',*
-
 * Be longer than 100 UTF-8 encoded bytes
-
 * Be exactly *.* or *..*
 
 Aliases created in versions before 5.1.0 are still supported but no new aliases can be added that violate those rules.  Since modifying an alias in Elasticsearch is removing it and recreating it automatically using the *_aliases* API, modifying aliases with invalid names is also no longer supported.
@@ -2061,7 +1955,7 @@ This section discusses the changes that you need to be aware of when migrating y
 
 ### Migration Plugin:
 
-The *[elasticsearch-migratio*n](https://github.com/elastic/elasticsearch-migration/blob/2.x/README.asciidoc)[ plugin](https://github.com/elastic/elasticsearch-migration/blob/2.x/README.asciidoc) (compatible with Elasticsearch 2.3.0 and above) will help to find issues that needs to be addressed when upgrading to Elasticsearch 5.0
+The *[elasticsearch-migration]*(https://github.com/elastic/elasticsearch-migration/blob/2.x/README.asciidoc)[ plugin](https://github.com/elastic/elasticsearch-migration/blob/2.x/README.asciidoc) (compatible with Elasticsearch 2.3.0 and above) will help to find issues that needs to be addressed when upgrading to Elasticsearch 5.0
 
 Indices created before 5.0:
 
@@ -2083,49 +1977,30 @@ The *count* search type was deprecated since version 2.0.0 and is now removed.  
 
 For instance, the following request:
 
-$body = '{
-
-  "aggs": {
-
-    "my_terms": {
-
-       "terms": {
-
-         "field": "foo"
-
-       }
-
-     }
-
-  }
-
-}'
-
-Invoke-WebRequest -Method POST -Uri "http://localhost:9200/bank/_search?search_type=count" -ContentType 'application/json' -body $body | select content | format-list
+	$body = '{
+	  "aggs": {
+	    "my_terms": {
+	       "terms": {
+		 "field": "foo"
+	       }
+	     }
+	  }
+	}'
+	Invoke-WebRequest -Method POST -Uri "http://localhost:9200/bank/_search?search_type=count" -ContentType 'application/json' -body $body | select content | format-list
 
 Can be replaced with:
 
-$body = '{
-
-  "size": 0,
-
-  "aggs": {
-
-    "my_terms": {
-
-       "terms": {
-
-         "field": "foo"
-
-       }
-
-     }
-
-  }
-
-}'
-
-Invoke-WebRequest -Method POST -Uri "http://localhost:9200/bank/_search" -ContentType 'application/json' -body $body | select content | format-list
+	$body = '{
+	  "size": 0,
+	  "aggs": {
+	    "my_terms": {
+	       "terms": {
+		 "field": "foo"
+	       }
+	     }
+	  }
+	}'
+	Invoke-WebRequest -Method POST -Uri "http://localhost:9200/bank/_search" -ContentType 'application/json' -body $body | select content | format-list
 
 **Notice the method being used as POST, not GET**.
 
@@ -2133,17 +2008,12 @@ Invoke-WebRequest -Method POST -Uri "http://localhost:9200/bank/_search" -Conten
 
 The scan search type was deprecated since version 2.1.0 and is now removed.  All benefits from this search type can now be achieved by doing a scroll request that sorts documents in _doc order, for instance:
 
-$body = '{
-
-  "sort": [
-
-    "_doc"
-
-  ]
-
-}'
-
-Invoke-WebRequest -Method POST -Uri "http://localhost:9200/bank/_search?scroll=2m&pretty" -ContentType 'application/json' -body $body | select content | format-list
+	$body = '{
+	  "sort": [
+	    "_doc"
+	  ]
+	}'
+	Invoke-WebRequest -Method POST -Uri "http://localhost:9200/bank/_search?scroll=2m&pretty" -ContentType 'application/json' -body $body | select content | format-list
 
 Scroll requests sorted by *_doc* have been optimised to move more efficiently resume from where the previous request stopped, so will have the same performance characteristics as the former *scan* search type.
 
@@ -2168,85 +2038,56 @@ The search exists API has been removed in favour of using the search API with *s
 The following deprecated queries has been removed:
 
 *filtered*
-
-	use *bool* query instead, which supports *filter* clauses too.
+use *bool* query instead, which supports *filter* clauses too.
 
 *and*
-
-	use *must* clauses in a *bool* query instead.
+use *must* clauses in a *bool* query instead.
 
 *or*
-
-	use *should* clauses in a *bool* query instead.
+use *should* clauses in a *bool* query instead.
 
 *missing*
-
-	use a negated *exists* query instead. (Also removed *_missing_* from the *query_string query*)
+use a negated *exists* query instead. (Also removed *_missing_* from the *query_string query*)
 
 *limit*
-
-	use the *terminate_after* parameter instead.
+use the *terminate_after* parameter instead.
 
 *fquery*
-
-	is obsolete after filters and queries have been merged.
+is obsolete after filters and queries have been merged.
 
 *query*
-
-	is obsolete after filters and queries have been merged.
+is obsolete after filters and queries have been merged.
 
 *query_binary*
-
-	was undocumented and has been removed.
+was undocumented and has been removed.
 
 *filter_binary*
+was undocumented and has been removed.
 
-	was undocumented and has been removed.
 
-	
 
 ### Changes to queries:
 
 * Unsupported queries such as term queries on *geo_point* fields will now fail rather than returning no hits.
-
 * Removed support for fuzzy queries on numeric, date and ip fields, use range queries instead.
-
 * Removed support for range and prefix queries on *_uid* and *_id* fields.
-
 * Querying an unindexed field will now fail rather than returning no hits.
-
 * Removed support for the deprecated *min_similarity* parameter in *fuzzy query*, in favour of *fuzziness*.
-
 * Removed support for the deprecated *fuzzy_min_sim* parameter in *query_string* query, in favour of *fuzziness*.
-
 * Removed support from the deprecated *edit_distance* parameter in completion suggester, in favour of *fuzziness*.
-
 * Removed support for the deprecated *filter* and *no_match_filter* fields in *indices* query, in favour of *query* and *no_match_query*.
-
 * Removed support for the deprecated *filter* fields in *nested* query, in favour of *query*.
-
 * Removed support for the deprecated *minimum_should_match* and *disable_coord* in terms *query*, use *bool* query instead.  Also removed support for the deprecated *execution* parameter.
-
 * Removed support for the top level *filter* element in function_score query, replaced by *query*.
-
 * The *collect_payloads* parameter of the *span_near* query has been deprecated.  Payloads will be loaded when needed.
-
 * The *score_type* parameter to the *nested* and *has_child* queries has been removed in favour of *score_mode*.  The *score_mode* parameter to *has_parent* has been deprecated in favour of the *score* boolean parameter.  Also the *total* score mode has been removed in favour of the *sum* mode.
-
 * When the *max_children* parameter was set to *0* in the *has_child* query, then there was no upper limit on how many child documents were allowed to match.  Now, *0* really means that zero child documents are allowed.  If no upper limit is needed then the *max_children* parameter shouldn't be specified at all.
-
 * The *exists* query will now fail if the *_field_names* field is disabled.
-
 * The *multi_match* query will fail if *fuzziness* is used for *cross_fields*, *phrase* or *phrase_prefix* type.  This parameter was undocumented and silently ignored before for these types of *multi_match*.
-
 * Deprecated support for the *coerce*, *normalize*, *ignore_malformed* parameters is *GeoPolygonQuery*.  Use parameter *validation_method* instead.
-
 * Deprecated support for the *coerce*, *normalize*, *ignore_malformed* parameters is *GeoDistanceQuery*.  Use parameter *validation_method* instead.
-
 * Deprecated support for the *coerce*, *normalize*, *ignore_malformed* parameters is *GeoBoundingBoxQuery*.  Use parameter *validation_method* instead.
-
 * The *geo_distance_range* query is deprecated and should be replaced by either the *geo_distance bucket* aggregation, or *geo_distance* sort.
-
 * For *geo_distance* query, aggregation and sort, the *sloppy_arc* option for the *distance_type* parameter has been deprecated.
 
 #### Top level filter parameter:
@@ -2268,11 +2109,8 @@ The *reverse* parameter has been removed, in favour of explicitly specifying the
 #### Inner hits:
 
 * Top level inner hits syntax has been removed.  Inner hits can now only be specified as part of the *nested*, *has_child* and *has_parent* queries.  Use cases previously only possible with top level inner hits can now be done with inner hits defined inside the query dsl.
-
 * Source filtering for inner hits inside nested queries requires full field names instead of relative field names.  This is now consistent for source filtering on other places in the search API.
-
 * Nested inner hits will now no longer include *_index*, *_type* and *_id* keys.  For nested inner hits these values are always the same as the *_index*, *_type* and *_id* keys of the root search hit.
-
 * Parent/child inner hits will now no longer include the *_index* key.  For parent/child inner hits the *_index* key is always the same as the parent search hit.
 
 #### Query Profiler:
@@ -2310,26 +2148,23 @@ The *fields* field has been renamed to *store_fields*.
 The *string* field datatype has been replaced by the *text* field for full text analyzed content, and the *keyword* field for not-analyzed exact string values.  For backwards compatibility purposes, during the 5.x series:
 
 * *string* fields on pre-5.0 indices will function as before.
-
 * New *string* fields can be added to pre-5.0 indices as before.
-
 * *text* and *keyword* fields can also be added to pre-5.0 indices.
-
 * When adding a *string* field to a new index, the field mapping will be rewritten as a *text* or *keyword* field if possible, otherwise an exception will be thrown.  Certain configurations that were possible with *string* fields are no longer possible with *text/keywords* fields such as enabling *term_vectors* on a not-analyzed *keyword* field.
 
 #### Default string mappings:
 
 String mappings now have the following default mappings:
 
-{
-  "type": "text",
-  "fields": {
-    "keyword": {
-      "type": "keyword",
-      "ignore_above": 256
-    }
-  }
-}
+	{
+	  "type": "text",
+	  "fields": {
+	    "keyword": {
+	      "type": "keyword",
+	      "ignore_above": 256
+	    }
+	  }
+	}
 
 This allows to perform full-text search on the original field name and to sort and run aggregations on the sub keyword field.
 
@@ -2341,39 +2176,23 @@ Term queries will return constant scores now, while they used to return higher s
 
 Note that this *[keywor*d](https://www.elastic.co/guide/en/elasticsearch/reference/current/keyword.html) mapping do not need to replace the numeric mapping.  For instance, if you need both sorting and scoring on your numeric field, you could map it both as a number and a keyword using *[field*s](https://www.elastic.co/guide/en/elasticsearch/reference/current/multi-fields.html):
 
-$body = '{
-
-  "mappings": {
-
-    "my_type": {
-
-      "properties": {
-
-        "my_number": {
-
-          "type": "long",
-
-          "fields": {
-
-            "keyword": {
-
-              "type":  "keyword"
-
-            }
-
-          }
-
-        }
-
-      }
-
-    }
-
-  }
-
-}'
-
-Invoke-WebRequest -Method PUT -Uri "http://localhost:9200/my_index/" -ContentType 'application/json' -body $body | select content | format-list
+	$body = '{
+	  "mappings": {
+	    "my_type": {
+	      "properties": {
+		"my_number": {
+		  "type": "long",
+		  "fields": {
+		    "keyword": {
+		      "type":  "keyword"
+		    }
+		  }
+		}
+	      }
+	    }
+	  }
+	}'
+	Invoke-WebRequest -Method PUT -Uri "http://localhost:9200/my_index/" -ContentType 'application/json' -body $body | select content | format-list
 
 Also, the *precision_step* parameter is now irrelevant and will be rejected on indices that are created on or after 5.0.
 
@@ -2418,9 +2237,7 @@ The source *transform* feature has been removed.  Instead, use an ingest pipelin
 To prevent mapping explosions, the following limits are applied to indices created in 5.x:
 
 * The maximum number of fields in an index is limited to 1000.
-
 * The maximum depth for a field (1 plus the number of *object* or *nested* parents) is limited to 20.
-
 * The maximum number of nested fields in an index is limited to 50.
 
 See the section called "[Settings to prevent mapping explosions](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html#mapping-limit-settings)" for more.
@@ -2437,10 +2254,10 @@ The *_source* mapping no longer supports the *format* option.  It will still be 
 
 Core types no longer support the object notation, which was used to provide per document boosts as follows:
 
-{
-  "value": "field_value",
-  "boost": 42
-}
+	{
+	  "value": "field_value",
+	  "boost": 42
+	}
 
 #### Boost accuracy for queries on *_all*:
 
@@ -2452,39 +2269,27 @@ You can no longer create indexes with *_ttl* or *_timestamp* enabled.  Indexes w
 
 You should replace *_timestamp* in new indexes by adding a field to your source either in the application producing the data or with the ingest pipeline like this:
 
-$body = '{
-
-  "description" : "Adds a timestamp field at the current time",
-
-  "processors" : [ {
-
-    "set" : {
-
-      "field": "timestamp",
-
-      "value": "{{_ingest.timestamp}}"
-
-    }
-
-  } ]
-
-}'
-
-Invoke-WebRequest -Method PUT -Uri "http://localhost:9200/_ingest/pipeline/timestamp?pretty" -ContentType 'application/json' -body $body | select content | format-list
+	$body = '{
+	  "description" : "Adds a timestamp field at the current time",
+	  "processors" : [ {
+	    "set" : {
+	      "field": "timestamp",
+	      "value": "{{_ingest.timestamp}}"
+	    }
+	  } ]
+	}'
+	Invoke-WebRequest -Method PUT -Uri "http://localhost:9200/_ingest/pipeline/timestamp?pretty" -ContentType 'application/json' -body $body | select content | format-list
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_61.png)
 
-$body = '{
-
-  "example": "data"
-
-}'
-
-Invoke-WebRequest -Method PUT -Uri "http://localhost:9200/newindex/type/1?pipeline=timestamp&pretty" -ContentType 'application/json' -body $body | select content | format-list
+	$body = '{
+	  "example": "data"
+	}'
+	Invoke-WebRequest -Method PUT -Uri "http://localhost:9200/newindex/type/1?pipeline=timestamp&pretty" -ContentType 'application/json' -body $body | select content | format-list
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_62.png)
 
-Invoke-WebRequest -Method GET -Uri "http://localhost:9200/newindex/type/1?pretty" | select content | format-list
+	Invoke-WebRequest -Method GET -Uri "http://localhost:9200/newindex/type/1?pretty" | select content | format-list
 
 Which produces the following:
 
@@ -2492,65 +2297,40 @@ Which produces the following:
 
 If you have an old index created with 2.x that has *_timestamp* enabled, then you can migrate it to a new index with the *timestamp* field in the source with reindex:
 
-$body = '{
-
-  "source": {
-
-    "index": "oldindex"
-
-  },
-
-  "dest": {
-
-    "index": "newindex"
-
-  },
-
-  "script": {
-
-    "lang": "painless",
-
-    "inline": "ctx._source.timestamp = ctx._timestamp; ctx._timestamp = null"
-
-  }
-
-}'
-
-Invoke-WebRequest -Method POST -Uri "http://localhost:9200/_reindex?pretty" -ContentType 'application/json' -body $body | select content | format-list
+	$body = '{
+	  "source": {
+	    "index": "oldindex"
+	  },
+	  "dest": {
+	    "index": "newindex"
+	  },
+	  "script": {
+	    "lang": "painless",
+	    "inline": "ctx._source.timestamp = ctx._timestamp; ctx._timestamp = null"
+	  }
+	}'
+	Invoke-WebRequest -Method POST -Uri "http://localhost:9200/_reindex?pretty" -ContentType 'application/json' -body $body | select content | format-list
 
 You can replace _ttl with time based index names (preferred) or by adding a scheduled task which runs a delete-by-query on a timestamp field in the source document.  If you had documents like this:
 
-$body = '{"index":{"_id":1}}
-
-{"example": "data", "timestamp": "2016-06-21T18:48:55.560+0000" }
-
-{"index":{"_id":2}}
-
-{"example": "data", "timestamp": "2016-04-21T18:48:55.560+0000" }'
-
-Invoke-WebRequest -Method POST -uri "http://localhost:9200/index/type/_bulk?pretty" -body $body -ContentType 'application/json' | select Content | format-List
+	$body = '{"index":{"_id":1}}
+		{"example": "data", "timestamp": "2016-06-21T18:48:55.560+0000" }
+		{"index":{"_id":2}}
+		{"example": "data", "timestamp": "2016-04-21T18:48:55.560+0000" }'
+	Invoke-WebRequest -Method POST -uri "http://localhost:9200/index/type/_bulk?pretty" -body $body -ContentType 'application/json' | select Content | format-List
 
 Then you could delete all of the documents from before June 1st with:
 
-$body = '{
-
-  "query": {
-
-    "range" : {
-
-      "timestamp" : {
-
-        "lt" : "2016-05-01"
-
-      }
-
-    }
-
-  }
-
-}'
-
-Invoke-WebRequest -Method POST -uri "http://localhost:9200/index/type/_delete_by_query?pretty" -body $body -ContentType 'application/json' | select Content | format-List
+	$body = '{
+	  "query": {
+	    "range" : {
+	      "timestamp" : {
+		"lt" : "2016-05-01"
+	      }
+	    }
+	  }
+	}'
+	Invoke-WebRequest -Method POST -uri "http://localhost:9200/index/type/_delete_by_query?pretty" -body $body -ContentType 'application/json' | select Content | format-List
 
 **Important**:  Keep in mind that deleting documents from an index is very expensive compared to deleting whole indices.  That is why time based indices are recommended over this sort of thing, and why *_ttl* was deprecated in the first place.
 
@@ -2603,46 +2383,45 @@ Scripts with no explicit language set in percolator queries stored in indices cr
 In order to make use of the new *percolator* field type, all percolator queries should be reindexed into a new index.  When reindexing percolator queries with scripts that have no explicit language defined into a new index, one of the following two things should be done in order to make the scripts work:
 
 * (Recommended approach) While reindexing the percolator documents, migrate the scripts to the Painless scripting language.
-
 * Or add the *lang* parameter on the script and set it to the language these scripts were written in.
 
 #### Java client:
 
 The percolator is no longer part of the core Elasticsearch dependency.  It has moved to the percolator module.  Therefore, when using the percolator feature from the Java client, the new percolator module should also be on the classpath.  Also, the transport clients should load the percolator module as plugin:
 
-TransportClient transportClient = TransportClient.builder()
-        .settings(Settings.builder().put("node.name", "node"))
-        .addPlugin(PercolatorPlugin.class)
-        .build();
-transportClient.addTransportAddress(
-        new InetSocketTransportAddress(new InetSocketAddress(InetAddresses.forString("127.0.0.1"), 9300))
-);
+	TransportClient transportClient = TransportClient.builder()
+		.settings(Settings.builder().put("node.name", "node"))
+		.addPlugin(PercolatorPlugin.class)
+		.build();
+	transportClient.addTransportAddress(
+		new InetSocketTransportAddress(new InetSocketAddress(InetAddresses.forString("127.0.0.1"), 9300))
+	);
 
 The percolators and multi percolate related methods from the *client* interface have been removed.  These APIs have been deprecated and it is recommended to use the *percolate* query in either the search or multi search API. However, the percolate and multi percolate APIs can still be used from the Java client.
 
 Using percolate request:
 
-PercolateRequest request = new PercolateRequest();
-// set stuff and then execute:
-PercolateResponse response = transportClient.execute(PercolateAction.INSTANCE, request).actionGet();
+	PercolateRequest request = new PercolateRequest();
+	// set stuff and then execute:
+	PercolateResponse response = transportClient.execute(PercolateAction.INSTANCE, request).actionGet();
 
 Using percolate request builder:
 
-PercolateRequestBuilder builder = new PercolateRequestBuilder(transportClient, PercolateAction.INSTANCE);
-// set stuff and then execute:
-PercolateResponse response = builder.get();
+	PercolateRequestBuilder builder = new PercolateRequestBuilder(transportClient, PercolateAction.INSTANCE);
+	// set stuff and then execute:
+	PercolateResponse response = builder.get();
 
 Using multi percolate request:
 
-MultiPercolateRequest request = new MultiPercolateRequest();
-// set stuff and then execute:
-MultiPercolateResponse response = transportClient.execute(MultiPercolateAction.INSTANCE, request).get();
+	MultiPercolateRequest request = new MultiPercolateRequest();
+	// set stuff and then execute:
+	MultiPercolateResponse response = transportClient.execute(MultiPercolateAction.INSTANCE, request).get();
 
 Using multi percolate request builder:
 
-MultiPercolateRequestBuilder builder = new MultiPercolateRequestBuilder(transportClient, MultiPercolateAction.INSTANCE);
-// set stuff and then execute:
-MultiPercolateResponse response = builder.get();
+	MultiPercolateRequestBuilder builder = new MultiPercolateRequestBuilder(transportClient, MultiPercolateAction.INSTANCE);
+	// set stuff and then execute:
+	MultiPercolateResponse response = builder.get();
 
 # Other Alternatives:
 
