@@ -185,7 +185,7 @@ The above indicates that there are no indices yet in the cluster.
 
 1. Create an index named "customer" with the following command:
 
-*Invoke-WebRequest -Method PUT -Uri **[http://localhost:9200/custome*r](http://localhost:9200/customer)
+*Invoke-WebRequest -Method PUT -Uri http://localhost:9200/customer*
 
 Output as follows:
 
@@ -203,17 +203,17 @@ Output as follows:
 
 [https://www.elastic.co/guide/en/elasticsearch/reference/current/_index_and_query_a_document.html#_index_and_query_a_document](https://www.elastic.co/guide/en/elasticsearch/reference/current/_index_and_query_a_document.html#_index_and_query_a_document)
 
-We will now enter something into the customer index.  In order to **[index** ](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc)a **[documen**t](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc), we must tell Elasticsearch which **[typ**e](https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_type) in the index it should go to.
+We will now enter something into the customer index.  In order to [index](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc)a [document](https://github.com/elastic/elasticsearch/edit/5.0/docs/reference/getting-started.asciidoc), we must tell Elasticsearch which [type](https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_type) in the index it should go to.
 
 As we are getting into more complex commands/scripts in Powershell, it is advised to use the **Powershell ISE** (or any other equivalent editor of your choice) for the following sections. 
 
 1. Index a customer document into the customer index, "external" type, with ID of “1” as follows:
 
-*$name** **=** @{**"name"** **=** **"John Doe"**}*
+*$name = @{"name" = "John Doe"}*
 
-*$json** **=** **$name** **|** **ConvertTo-Json*
+*$json = $name | ConvertTo-Json*
 
-*Invoke-WebRequest** **-Uri** **"http://localhost:9200/customer/external/1"** **-Body** **$json** **-ContentType** **'application/json'** **-Method** **Put* 
+*Invoke-WebRequest -Uri "http://localhost:9200/customer/external/1" -Body $json -ContentType 'application/json' -Method Put* 
 
 2. The output will look similar to the following:
 
@@ -263,7 +263,7 @@ Elasticsearch provides data manipulation and search capabilities in near real ti
 
 ### Indexing/Replacing Documents:
 
-1.   	Previously we saw how to index a document.  Here is the command again:
+1.  Previously we saw how to index a document.  Here is the command again:
 
  
 
@@ -273,13 +273,13 @@ The above will index the specified document into a customer index, external type
 
  
 
-2.  	If the above command is executed again with a different (or same) document, Elasticsearch will replace (ie. reindex) a new document on top of the existing one with the ID of 1: 
+2.  If the above command is executed again with a different (or same) document, Elasticsearch will replace (ie. reindex) a new document on top of the existing one with the ID of 1: 
 
  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_14.png)
 
  
 
-3.  	The above changes the name of the document with the ID of 1 from "John Doe" to “Jane Doe”.  If we used a different ID, a new document will be indexed and the existing document(s) already in the index remains untouched.
+3.  The above changes the name of the document with the ID of 1 from "John Doe" to “Jane Doe”.  If we used a different ID, a new document will be indexed and the existing document(s) already in the index remains untouched.
 
  
 
@@ -287,11 +287,11 @@ The above will index the specified document into a customer index, external type
 
 The above indexes a new document with an ID of 2.
 
-4.       When indexing, the ID part is optional.  If not specified, Elasticsearch will generate a random ID and then use it to index the document.  The actual ID Elasticsearch generates (or whatever we specified explicitly) is returned as part of the index API call.
+4.  When indexing, the ID part is optional.  If not specified, Elasticsearch will generate a random ID and then use it to index the document.  The actual ID Elasticsearch generates (or whatever we specified explicitly) is returned as part of the index API call.
 
  
 
-5.       This example shows how to index a document without an explicit ID:
+5.  This example shows how to index a document without an explicit ID:
 
   ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_16.png)
 
