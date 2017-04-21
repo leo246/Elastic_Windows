@@ -113,31 +113,31 @@ For the purpose of this document, we used **Java 8u112.**
 
 **Variable Name**:  JAVA_HOME
 
-**Variable Value**:  <path to your Java JDK folder>
+**Variable Value**:  c:\path\to\java\install
 
 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_0.png)
 
-	Click **OK **and close all windows.
+Click **OK** and close all windows.
 
-	Or use the following Powershell Command:
+Or use the following Powershell Command:	
 
 	[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk1.8.0_112","Machine")
 
-4.  Browse to [https://www.elastic.co/downloads/elasticsearch](https://www.elastic.co/downloads/elasticsearch) and download the **ElasticSearch ****version 5****.****3****.0 **(as at time of writing)** **zip file.
+4.  Browse to [https://www.elastic.co/downloads/elasticsearch](https://www.elastic.co/downloads/elasticsearch) and download the **ElasticSearch** **version** **5**.**3**.**0** **(as at time of writing)** zip file.
 
 5. Extract the ZIP file to your desired location.
 
 6. Open a Command or Powershell window, and navigate to the extracted folder, then the \bin folder:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_1.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_1.png)
 
 7. Execute the **elasticsearch.bat** file:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_2.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_2.png)
 
 8. Output should look similar to the following:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_3.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_3.png)
 
 ## Exploring Your Cluster:
 
