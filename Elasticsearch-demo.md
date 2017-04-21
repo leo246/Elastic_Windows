@@ -10,7 +10,6 @@ published: true
 
 **This documentation is Microsoft ****Windows**** specific (used on Windows 2012 R2).**
 
-[[TOC]]
 
 # Getting Started
 
@@ -108,7 +107,7 @@ Each Elasticsearch shard is a Lucene index. There is a maximum number of documen
 
 For the purpose of this document, we used **Java 8u112.**
 
-2. Once installed, navigate to **System**** **in Control Panel.  Click on **Advanced System Settings**, and then click the **Environment Variables **button.
+2. Once installed, navigate to **System** in Control Panel.  Click on **Advanced System Settings**, and then click the **Environment Variables** button.
 
 3. Create a System variable as follows:
 
@@ -116,7 +115,7 @@ For the purpose of this document, we used **Java 8u112.**
 
 **Variable Value**:  <path to your Java JDK folder>
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_0.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_0.png)
 
 	Click **OK **and close all windows.
 
@@ -386,13 +385,26 @@ The [Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/d
 
 We will now work with a more realistic dataset, through a sample of fictitious JSON documents of customer bank account information.  Each document has the following schema:
 
-{    "account_number": 0,    "balance": 16623,    "firstname": "Bradshaw",    "lastname": "Mckenzie",    "age": 29,    "gender": "F",    "address": "244 Columbus Place",    "employer": "Euron",    "email": "bradshawmckenzie@euron.com",    "city": "Hobucken",    "state": "CO"}
+{
+    "account_number": 0,
+    "balance": 16623,
+    "firstname": "Bradshaw",
+    "lastname": "Mckenzie",
+    "age": 29,
+    "gender": "F",
+    "address": "244 Columbus Place",
+    "employer": "Euron",
+    "email": "bradshawmckenzie@euron.com",
+    "city": "Hobucken",
+    "state": "CO"
+}
 
 Data generated from [http://www.json-generator.com/](http://www.json-generator.com/) so ignore actual values and semantics of data as these are all randomly generated.
 
 ### Loading the Sample Dataset:
 
-1.    Download the sample dataset (accounts.json)[ here](https://github.com/elastic/elasticsearch/blob/master/docs/src/test/resources/accounts.json?raw=true).  Extract the file to your current directoryand load the file into the cluster with the following command:
+1.    Download the sample dataset (accounts.json)[ here](https://github.com/elastic/elasticsearch/blob/master/docs/src/test/resources/accounts.json?raw=true).  Extract the file to your current directory
+and load the file into the cluster with the following command:
 
 **Invoke-WebRequest ****-Method**** ****POST ****-Uri**** ****"****[http://localhost:9200/bank/account/_bulk?pretty&refres**h](http://localhost:9200/bank/account/_bulk?pretty&refresh)**" ****-InFile**** ****accounts.json**
 
@@ -1282,7 +1294,16 @@ Elasticsearch uses [Log4j 2](https://logging.apache.org/log4j/2.x/) for logging.
 
 For example, if the log directory (*path.logs*) is *c:\ES\logs\elasticsearch* and the cluster is named *production*, then *${sys:es.logs.base_path}* will resolve to *c:\ES\logs\elasticsearch* and *${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}.log* will resolve to *c:\ES\logs\productions.log*.
 
-appender.rolling.type = RollingFile ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_36.png)appender.rolling.name = rollingappender.rolling.fileName = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}.log ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_37.png)appender.rolling.layout.type = PatternLayoutappender.rolling.layout.pattern = [%d{ISO8601}][%-5p][%-25c] %.10000m%nappender.rolling.filePattern = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}-%d{yyyy-MM-dd}.log ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_38.png)appender.rolling.policies.type = Policiesappender.rolling.policies.time.type = TimeBasedTriggeringPolicy ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_39.png)appender.rolling.policies.time.interval = 1 ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_40.png)appender.rolling.policies.time.modulate = true ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_41.png)
+appender.rolling.type = RollingFile ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_36.png)
+appender.rolling.name = rolling
+appender.rolling.fileName = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}.log ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_37.png)
+appender.rolling.layout.type = PatternLayout
+appender.rolling.layout.pattern = [%d{ISO8601}][%-5p][%-25c] %.10000m%n
+appender.rolling.filePattern = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}-%d{yyyy-MM-dd}.log ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_38.png)
+appender.rolling.policies.type = Policies
+appender.rolling.policies.time.type = TimeBasedTriggeringPolicy ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_39.png)
+appender.rolling.policies.time.interval = 1 ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_40.png)
+appender.rolling.policies.time.modulate = true ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_41.png)
 
 1. Configure the *RollingFile* appender.
 
@@ -1298,7 +1319,13 @@ appender.rolling.type = RollingFile ![image alt text]({{ site.url }}/public/6lSb
 
 If you append *.gz* or *.zip* to *appender.rolling.filepattern*, then the logs will be compressed as they are rolled.  If you want to retain log files for a specific period of time, use the rollover strategy with a delete action.
 
-appender.rolling.strategy.type = DefaultRolloverStrategy ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_42.png)appender.rolling.strategy.action.type = Delete ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_43.png)appender.rolling.strategy.action.basepath = ${sys:es.logs.base_path} ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_44.png)appender.rolling.strategy.action.condition.type = IfLastModified ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_45.png)appender.rolling.strategy.action.condition.age = 7D ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_46.png)appender.rolling.strategy.action.PathConditions.type = IfFileName ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_47.png)appender.rolling.strategy.action.PathConditions.glob = ${sys:es.logs.cluster_name}-* ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_48.png)
+appender.rolling.strategy.type = DefaultRolloverStrategy ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_42.png)
+appender.rolling.strategy.action.type = Delete ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_43.png)
+appender.rolling.strategy.action.basepath = ${sys:es.logs.base_path} ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_44.png)
+appender.rolling.strategy.action.condition.type = IfLastModified ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_45.png)
+appender.rolling.strategy.action.condition.age = 7D ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_46.png)
+appender.rolling.strategy.action.PathConditions.type = IfFileName ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_47.png)
+appender.rolling.strategy.action.PathConditions.glob = ${sys:es.logs.cluster_name}-* ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_48.png)
 
 1. Configure the DefaultRolloverStrategy.
 
@@ -1378,7 +1405,10 @@ The network.host setting also understands some special values as* _local_*,* _si
 
 Out of the box, without any network configurations, Elasticsearch will bind to the available loopback addresses and will scan ports 9300 to 9305 to try and connect to order nodes running on the same server.  This provides an auto-clustering experience without having to do any configuration.  When the need arise to form a cluster with nodes on other servers, you have to provide a seed list of other nodes in the cluster that are likely to be live and contactable.  This can be specified as follows:
 
-discovery.zen.ping.unicast.hosts:   - 192.168.1.10:9300   - 192.168.1.11 ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_49.png)   - seeds.mydomain.com ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_50.png)
+discovery.zen.ping.unicast.hosts:
+   - 192.168.1.10:9300
+   - 192.168.1.11 ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_49.png)
+   - seeds.mydomain.com ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_50.png)
 
 1. The port will default to *transport.profiles.default.port* and fallback to *transport.tcp.port* if not supported.
 
@@ -2494,7 +2524,15 @@ The *string* field datatype has been replaced by the *text* field for full text 
 
 String mappings now have the following default mappings:
 
-{  "type": "text",  "fields": {    "keyword": {      "type": "keyword",      "ignore_above": 256    }  }}
+{
+  "type": "text",
+  "fields": {
+    "keyword": {
+      "type": "keyword",
+      "ignore_above": 256
+    }
+  }
+}
 
 This allows to perform full-text search on the original field name and to sort and run aggregations on the sub keyword field.
 
@@ -2602,7 +2640,10 @@ The *_source* mapping no longer supports the *format* option.  It will still be 
 
 Core types no longer support the object notation, which was used to provide per document boosts as follows:
 
-{  "value": "field_value",  "boost": 42}
+{
+  "value": "field_value",
+  "boost": 42
+}
 
 #### Boost accuracy for queries on *_all*:
 
@@ -2772,25 +2813,39 @@ In order to make use of the new *percolator* field type, all percolator queries 
 
 The percolator is no longer part of the core Elasticsearch dependency.  It has moved to the percolator module.  Therefore, when using the percolator feature from the Java client, the new percolator module should also be on the classpath.  Also, the transport clients should load the percolator module as plugin:
 
-TransportClient transportClient = TransportClient.builder()        .settings(Settings.builder().put("node.name", "node"))        .addPlugin(PercolatorPlugin.class)        .build();transportClient.addTransportAddress(        new InetSocketTransportAddress(new InetSocketAddress(InetAddresses.forString("127.0.0.1"), 9300)));
+TransportClient transportClient = TransportClient.builder()
+        .settings(Settings.builder().put("node.name", "node"))
+        .addPlugin(PercolatorPlugin.class)
+        .build();
+transportClient.addTransportAddress(
+        new InetSocketTransportAddress(new InetSocketAddress(InetAddresses.forString("127.0.0.1"), 9300))
+);
 
 The percolators and multi percolate related methods from the *client* interface have been removed.  These APIs have been deprecated and it is recommended to use the *percolate* query in either the search or multi search API. However, the percolate and multi percolate APIs can still be used from the Java client.
 
 Using percolate request:
 
-PercolateRequest request = new PercolateRequest();// set stuff and then execute:PercolateResponse response = transportClient.execute(PercolateAction.INSTANCE, request).actionGet();
+PercolateRequest request = new PercolateRequest();
+// set stuff and then execute:
+PercolateResponse response = transportClient.execute(PercolateAction.INSTANCE, request).actionGet();
 
 Using percolate request builder:
 
-PercolateRequestBuilder builder = new PercolateRequestBuilder(transportClient, PercolateAction.INSTANCE);// set stuff and then execute:PercolateResponse response = builder.get();
+PercolateRequestBuilder builder = new PercolateRequestBuilder(transportClient, PercolateAction.INSTANCE);
+// set stuff and then execute:
+PercolateResponse response = builder.get();
 
 Using multi percolate request:
 
-MultiPercolateRequest request = new MultiPercolateRequest();// set stuff and then execute:MultiPercolateResponse response = transportClient.execute(MultiPercolateAction.INSTANCE, request).get();
+MultiPercolateRequest request = new MultiPercolateRequest();
+// set stuff and then execute:
+MultiPercolateResponse response = transportClient.execute(MultiPercolateAction.INSTANCE, request).get();
 
 Using multi percolate request builder:
 
-MultiPercolateRequestBuilder builder = new MultiPercolateRequestBuilder(transportClient, MultiPercolateAction.INSTANCE);// set stuff and then execute:MultiPercolateResponse response = builder.get();
+MultiPercolateRequestBuilder builder = new MultiPercolateRequestBuilder(transportClient, MultiPercolateAction.INSTANCE);
+// set stuff and then execute:
+MultiPercolateResponse response = builder.get();
 
 # Other Alternatives:
 
