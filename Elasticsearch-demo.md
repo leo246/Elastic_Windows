@@ -155,7 +155,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 2. The response would look similar to the following:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_4.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_4.png)
 
 3. Get a list of nodes with the following command:
 
@@ -163,7 +163,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 4. The output should look similar to the following:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_5.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_5.png)
 
 ### List All Indices:
 
@@ -175,7 +175,7 @@ For the following section, we will be using the Powershell (version 3 or higher)
 
 2.  The output should look similar to the following:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_6.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_6.png)
 
 The above indicates that there are no indices yet in the cluster.
 
@@ -189,7 +189,7 @@ The above indicates that there are no indices yet in the cluster.
 
 Output as follows:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_7.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_7.png)
 
 2. List the indexes again with the following command:
 
@@ -197,7 +197,7 @@ Output as follows:
 
 Output as follows:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_8.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_8.png)
 
 ### Index and Query a Document:
 
@@ -217,7 +217,7 @@ As we are getting into more complex commands/scripts in Powershell, it is advise
 
 2. The output will look similar to the following:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_9.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_9.png)
 
 The above indicates that a new customer document was successfully created inside the customer index and external type. Note:  Elasticsearch does not require you to explicitly create an index first before you can create documents into it.  Elasticsearch will automatically create the customer index if it didn't already exist beforehand.
 
@@ -227,7 +227,7 @@ The above indicates that a new customer document was successfully created inside
 
 4. The output should look similar to the following:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_10.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_10.png)
 
  
 
@@ -241,7 +241,7 @@ The above indicates that a new customer document was successfully created inside
 
 2. The output should look as follows:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_11.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_11.png)
 
 3. List all indexes with the following command:
 
@@ -249,7 +249,7 @@ The above indicates that a new customer document was successfully created inside
 
 4. With output as follows:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_12.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_12.png)
 
 ## Modifying your Data:
 
@@ -267,7 +267,7 @@ Elasticsearch provides data manipulation and search capabilities in near real ti
 
  
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_13.png) 
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_13.png) 
 
 The above will index the specified document into a customer index, external type and with ID of 1.  
 
@@ -275,7 +275,7 @@ The above will index the specified document into a customer index, external type
 
 2.  	If the above command is executed again with a different (or same) document, Elasticsearch will replace (ie. reindex) a new document on top of the existing one with the ID of 1: 
 
- ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_14.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_14.png)
 
  
 
@@ -283,7 +283,7 @@ The above will index the specified document into a customer index, external type
 
  
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_15.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_15.png)
 
 The above indexes a new document with an ID of 2.
 
@@ -293,7 +293,7 @@ The above indexes a new document with an ID of 2.
 
 5.       This example shows how to index a document without an explicit ID:
 
-  ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_16.png)
+  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_16.png)
 
 Note that in the above case, we are using the **POST **verb instead of **PUT **since we didn't specify an ID.
 
@@ -311,19 +311,19 @@ In addition to being able to index and replace documents, we can also update the
 
 1.       Update the previous document (ID of 1) by changing the name field to "Jane Doe":
 
-  ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_17.png)
+  ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_17.png)
 
  
 
 2.       This example shows how to update our previous document (ID of 1) by changing the name field to "Jane Doe" and at the same time add an age field to it:
 
- ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_18.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_18.png)
 
  
 
 3.       Updates can also be performed by using simple scripts.  This example uses a script to increment the age by 5:
 
- ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_19.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_19.png)
 
  
 
@@ -341,7 +341,7 @@ In the above, ctx._source refers to the current source document that is about to
 
  
 
- ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_20.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_20.png)
 
 See the[ Delete By Query API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html) to delete all documents matching a specific query.  It is much more efficient to delete a whole index instead of just deleting all documents with the Delete by Query API.
 
@@ -361,7 +361,7 @@ The following indexes two documents (ID 1 - John Doe and ID 2 - Jane Doe) in one
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_21.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_21.png)
 
 The following example updates the first document (ID of 1) and then deletes the second document (ID of 2) in one bulk operation:
 
@@ -371,7 +371,7 @@ Invoke-WebRequest -Method POST -Uri http://localhost:9200/_bulk?pretty -Body $Bo
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_22.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_22.png)
 
 Note above that for the delete action, there is no corresponding source document after it since deletes only require the ID of the document to be deleted.
 
@@ -418,7 +418,7 @@ and load the file into the cluster with the following command:
 
 3.       The output will look similar to the following:
 
- ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_23.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_23.png)
 
 Which means that we successfully bulk indexed 1000 documents into the bank index.
 
@@ -438,7 +438,7 @@ Invoke-WebRequest -Method GET -Uri "http://localhost:9200/bank/_search?q=*&sort=
 
  
 
- ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_24.png)
+ ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_24.png)
 
  
 
@@ -476,7 +476,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_25.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_25.png)
 
 The difference here is that instead of passing the q=* in the URI, we **POST **a JSON style query request to the* _search* API.  Once you get results back, Elasticsearch is completely done with the request and does not maintain any kind of server-side resources or open cursors into the results.
 
@@ -524,7 +524,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_26.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_26.png)
 
 This will only list the first 2 results.  Note, that if you do not specify a size parameter, it defaults to 10.
 
@@ -564,7 +564,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_27.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_27.png)
 
 ## Executing Searches:
 
@@ -588,7 +588,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-# ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_28.png)
+# ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_28.png)
 
 Note that the above simply reduces the *_source *field.  It will still only return one field named *_source *but within it, only fields *account_number *and *balance *are included.
 
@@ -680,7 +680,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_29.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_29.png)
 
 In the example above, the *bool must* clause specifies all queries that must be true for a documents to be considered a match
 
@@ -776,7 +776,7 @@ Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -C
 
 **(note: due to formatting, the lines above are wrapped.)**
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_30.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_30.png)
 
 ## Executing Filters:
 
@@ -828,7 +828,7 @@ $body = '{
 
 Invoke-WebRequest -Method post -uri http://localhost:9200/bank/_search?pretty -ContentType 'application/json' -Body $body | select content | format-list
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_31.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_31.png)
 
 In SQL, the above aggregation is similar in concept to:
 
@@ -1100,11 +1100,11 @@ Invoke-WebRequest -Method Get -Uri [http://localhost:9200](http://localhost:9200
 
 If Elasticsearch is not running:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_32.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_32.png)
 
 If Elasticsearch is running:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_33.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_33.png)
 
 ### Installing Elasticsearch as a Service on Windows:
 
@@ -1200,7 +1200,7 @@ The timeout in seconds that procrun waits for service to exit gracefully.  Defau
 
 it is possible to configure the service after it has been installed using the manager GUI (**elasticsearch-service-mgr.exe**), which offers insight into the installed service, including its status, startup type, JVM, start and stop settings amongst other things.  Simply invoking **elasticsearch-service.bat manager** for the command line will open the manager window:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_34.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_34.png)
 
 Most changes (like JVM settings) made through the manager GUI, will require a restart of the service in order for to take effect.
 
@@ -1210,7 +1210,7 @@ The *.zip* package is entirely self-contained.  All files and directories are, b
 
 This is very convenient because you don't have to create any directories to start using Elasticsearch, and uninstalling Elasticsearch is as easy as removing the *%ES_HOME%* directory.  However, it is advisable to change the default locations of the config directory, the data directory and the logs directory so that you do not delete important data later on.
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_35.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_35.png)
 
 ### Next Steps:
 
@@ -1294,16 +1294,16 @@ Elasticsearch uses [Log4j 2](https://logging.apache.org/log4j/2.x/) for logging.
 
 For example, if the log directory (*path.logs*) is *c:\ES\logs\elasticsearch* and the cluster is named *production*, then *${sys:es.logs.base_path}* will resolve to *c:\ES\logs\elasticsearch* and *${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}.log* will resolve to *c:\ES\logs\productions.log*.
 
-appender.rolling.type = RollingFile ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_36.png)
+appender.rolling.type = RollingFile ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_36.png)
 appender.rolling.name = rolling
-appender.rolling.fileName = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}.log ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_37.png)
+appender.rolling.fileName = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}.log ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_37.png)
 appender.rolling.layout.type = PatternLayout
 appender.rolling.layout.pattern = [%d{ISO8601}][%-5p][%-25c] %.10000m%n
-appender.rolling.filePattern = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}-%d{yyyy-MM-dd}.log ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_38.png)
+appender.rolling.filePattern = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}-%d{yyyy-MM-dd}.log ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_38.png)
 appender.rolling.policies.type = Policies
-appender.rolling.policies.time.type = TimeBasedTriggeringPolicy ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_39.png)
-appender.rolling.policies.time.interval = 1 ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_40.png)
-appender.rolling.policies.time.modulate = true ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_41.png)
+appender.rolling.policies.time.type = TimeBasedTriggeringPolicy ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_39.png)
+appender.rolling.policies.time.interval = 1 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_40.png)
+appender.rolling.policies.time.modulate = true ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_41.png)
 
 1. Configure the *RollingFile* appender.
 
@@ -1319,13 +1319,13 @@ appender.rolling.policies.time.modulate = true ![image alt text]({{ site.url }}/
 
 If you append *.gz* or *.zip* to *appender.rolling.filepattern*, then the logs will be compressed as they are rolled.  If you want to retain log files for a specific period of time, use the rollover strategy with a delete action.
 
-appender.rolling.strategy.type = DefaultRolloverStrategy ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_42.png)
-appender.rolling.strategy.action.type = Delete ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_43.png)
-appender.rolling.strategy.action.basepath = ${sys:es.logs.base_path} ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_44.png)
-appender.rolling.strategy.action.condition.type = IfLastModified ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_45.png)
-appender.rolling.strategy.action.condition.age = 7D ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_46.png)
-appender.rolling.strategy.action.PathConditions.type = IfFileName ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_47.png)
-appender.rolling.strategy.action.PathConditions.glob = ${sys:es.logs.cluster_name}-* ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_48.png)
+appender.rolling.strategy.type = DefaultRolloverStrategy ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_42.png)
+appender.rolling.strategy.action.type = Delete ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_43.png)
+appender.rolling.strategy.action.basepath = ${sys:es.logs.base_path} ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_44.png)
+appender.rolling.strategy.action.condition.type = IfLastModified ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_45.png)
+appender.rolling.strategy.action.condition.age = 7D ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_46.png)
+appender.rolling.strategy.action.PathConditions.type = IfFileName ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_47.png)
+appender.rolling.strategy.action.PathConditions.glob = ${sys:es.logs.cluster_name}-* ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_48.png)
 
 1. Configure the DefaultRolloverStrategy.
 
@@ -1407,8 +1407,8 @@ Out of the box, without any network configurations, Elasticsearch will bind to t
 
 discovery.zen.ping.unicast.hosts:
    - 192.168.1.10:9300
-   - 192.168.1.11 ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_49.png)
-   - seeds.mydomain.com ![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_50.png)
+   - 192.168.1.11 ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_49.png)
+   - seeds.mydomain.com ![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_50.png)
 
 1. The port will default to *transport.profiles.default.port* and fallback to *transport.tcp.port* if not supported.
 
@@ -1660,7 +1660,7 @@ After starting Elasticsearch, verify the setting applied, by checking the *mlock
 
 Invoke-WebRequest -Method GET -Uri "http://localhost:9200/_nodes?pretty&filter_path=**.mlockall" | select Content | Format-List
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_51.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_51.png)
 
 If the value of *mlockall* is false, then this means that the request has failed. You will also see a line with more information in the logs, with the words:  *unable to lock JVM memory*.
 
@@ -1672,13 +1672,13 @@ The second option is to completely disable swap.  Usually Elasticsearch is the o
 
 Click on **Settings** under the *Performance* section.
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_52.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_52.png)
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_53.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_53.png)
 
 Click on the **Change** button.
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_54.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_54.png)
 
 Untick the box that reads **Automatically manage paging file size for all drives** if selected.  Then select the **No paging** file radio button, and click on the **Set** button.  Click **Ok** and close all the windows.  A restart might be required.
 
@@ -1798,7 +1798,7 @@ $body = '{
 
 Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_55.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_55.png)
 
 2. **Stop non-essential indexing and perform a synced flush (Optional):**
 
@@ -1806,7 +1806,7 @@ You may happily continue indexing during the upgrade.  However, shard recovery w
 
 Invoke-WebRequest -Method POST -Uri "http://localhost:9200/_flush/synced?pretty" | select content | format-list
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_56.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_56.png)
 
 A synced flush request is a "best effort" operation.  It will fail if there are any pending indexing operations, but it is safe to reissue the request multiple times if required.
 
@@ -1850,7 +1850,7 @@ $body = '{
 
 Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_57.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_57.png)
 
 7. **Wait for the node to recover:**
 
@@ -1898,7 +1898,7 @@ $body = '{
 
 Invoke-WebRequest -method PUT -uri "http://localhost:9200/_cluster/settings" -ContentType 'application/json' -body $body | select content | format-list
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_58.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_58.png)
 
 2. **Perform a synced flush:**
 
@@ -1906,7 +1906,7 @@ Shard recovery will be much faster if you temporarily stop non-essential indexin
 
 Invoke-WebRequest -Method POST -Uri "http://localhost:9200/_flush/synced?pretty" | select content | format-list
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_59.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_59.png)
 
 A synced flush request is a "best effort" operation.  It will fail if there are any pending indexing operations, but it is safe to reissue the request multiple times if required.
 
@@ -2046,7 +2046,7 @@ Then stop the relevant PID:
 
 Stop-Process -ID 12540
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_60.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_60.png)
 
 ### Stopping on Fatal Errors:
 
@@ -2675,7 +2675,7 @@ $body = '{
 
 Invoke-WebRequest -Method PUT -Uri "http://localhost:9200/_ingest/pipeline/timestamp?pretty" -ContentType 'application/json' -body $body | select content | format-list
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_61.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_61.png)
 
 $body = '{
 
@@ -2685,13 +2685,13 @@ $body = '{
 
 Invoke-WebRequest -Method PUT -Uri "http://localhost:9200/newindex/type/1?pipeline=timestamp&pretty" -ContentType 'application/json' -body $body | select content | format-list
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_62.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_62.png)
 
 Invoke-WebRequest -Method GET -Uri "http://localhost:9200/newindex/type/1?pretty" | select content | format-list
 
 Which produces the following:
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_63.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_63.png)
 
 If you have an old index created with 2.x that has *_timestamp* enabled, then you can migrate it to a new index with the *timestamp* field in the source with reindex:
 
@@ -2861,7 +2861,7 @@ Slightly out of scope for this document, you could install cURL for Windows by f
 
 Powershell also has an alias called curl, not to be confused with the 3rd party application cURL above.
 
-![image alt text]({{ site.url }}/public/6lSb1O50J2gMLrZwAnZl8Q_img_64.png)
+![image alt text](/public/6lSb1O50J2gMLrZwAnZl8Q_img_64.png)
 
 ## Sense:
 
